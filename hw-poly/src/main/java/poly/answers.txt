@@ -1,0 +1,64 @@
+## CSE 331 hw-poly Questions
+## Part 0
+###########################################################################
+
+1. Multiplication Pseudocode
+
+
+
+2. Division Pseudocode
+
+
+
+3. Division Example: (x3+x-1) / (x+1) = x2-x+2
+
+
+
+
+## Part 1
+###########################################################################
+
+1. Weakened Rep Invariant
+
+
+
+2. Alternate add, sub, mul, div
+
+
+
+3. Constructor checkReps
+
+
+
+
+## Part 2
+###########################################################################
+
+1. Calls to checkRep in RatTerm
+
+
+
+2. Weakened Rep Invariant
+
+
+
+3. Alternate Rep Invariant
+
+
+
+4. Preferred Invariants
+
+
+
+
+## Part 3
+###########################################################################
+
+1. Calls to checkRep in RatPoly
+
+
+
+2. Alternate Representation
+
+
+
