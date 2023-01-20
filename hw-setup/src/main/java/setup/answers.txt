@@ -4,15 +4,15 @@
 1. Why did Fibonacci fail the testThrowsIllegalArgumentException< test? What (if anything) did
 you have to do to fix it? If you did not have to change anything to fix this issue, explain why.
 
-
+It stated that 0 is nonnegative. In the method getFibTerm, I changed the if function from (n <= 0) to (n < 0 ) so that n will not equal 0, which is not negative. 
 
 2. Why did Fibonacci fail the testBaseCase test? What (if anything) did you have to do to fix
 it? If you did not have to change anything to fix this issue, explain why.
 
-
+It stated that 0 is negative via the thrown exception, which is false. So I changed the if function from (n <= 0) to (n < 0) which fixed the test.
 
 3.Why did Fibonacci fail the testInductiveCase test? What (if anything) did you have to do to
 fix it? If you did not have to change anything to fix this issue, explain why.
 
-
+It stated that the expected number was 2 but actually came out as 1. I changed the second if statement from (n <= 2) to (n < 2) and also changed the return statement which used subtraction. I changed it to addition, the correct reccursion of fibonacci. 
 
