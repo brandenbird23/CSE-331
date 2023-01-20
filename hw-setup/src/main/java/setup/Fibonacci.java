@@ -10,6 +10,10 @@
  */
 
 package setup;
+/**
+ * Branden Bird
+ * HW3, CSE 331 B
+ */
 
 /**
  * Fibonacci calculates the <var>n</var>th term in the Fibonacci sequence.

@@ -10,6 +10,10 @@
  */
 
 package setup;
+/**
+ * Branden Bird
+ * HW3, CSE 331 B
+ */
 
 /**
  * HolaWorld is like HelloWorld except it can say hello in Spanish!

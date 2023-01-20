@@ -1,4 +1,9 @@
 package setup;
+/**
+ * Branden Bird
+ * HW3, CSE 331 B
+ */
+
 import java.util.Random;
 
 /** RandomHello selects and prints a random greeting. */

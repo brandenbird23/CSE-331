@@ -10,6 +10,10 @@
  */
 
 package setup;
+/**
+ * Branden Bird
+ * HW3, CSE 331 B
+ */
 
 import java.lang.Iterable;
 import java.util.Comparator;

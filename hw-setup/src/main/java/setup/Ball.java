@@ -10,6 +10,10 @@
  */
 
 package setup;
+/**
+ * Branden Bird
+ * HW3, CSE 331 B
+ */
 
 /**
  * This is a simple object that has a volume.
