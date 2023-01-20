@@ -24,6 +24,8 @@ public class BallContainer implements Iterable<Ball> {
      * Contents of the BallContainer.
      */
     private Set<Ball> contents;
+    private double totalVolume; // Field added to hold the total volume of balls
+    private int amountBalls; // Field added to hold total balls in BallContainer
 
     /**
      * Constructor that creates a new BallContainer.
@@ -37,6 +39,8 @@ public class BallContainer implements Iterable<Ball> {
         // operator is used where the compiler can infer what the type should be
         // based on other information.
         this.contents = new HashSet<>();
+        totalVolume = 0;
+        amountBalls = 0;
     }
 
     /**
@@ -71,8 +75,17 @@ public class BallContainer implements Iterable<Ball> {
      * @spec.requires b != null.
      */
     public boolean add(Ball b) {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        if (b != null) {
+            if (contents.contains(b)) {
+                return false;
+            } else {
+                totalVolume += b.getVolume();
+                amountBalls++;
+                return contents.add(b);
+            }
+        } else {
+            throw new IllegalArgumentException("Cannot add null ball to container.");
+        }
     }
 
     /**
@@ -89,8 +102,17 @@ public class BallContainer implements Iterable<Ball> {
      * @spec.requires b != null.
      */
     public boolean remove(Ball b) {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        if (b != null) {
+            if (contents.contains(b)) {
+                totalVolume -= b.getVolume();
+                amountBalls--;
+                return contents.remove(b);
+            } else {
+                return false;
+            }
+        } else {
+            throw new IllegalArgumentException("Cannot remove null ball from container.");
+        }
     }
 
     /**
@@ -100,8 +122,7 @@ public class BallContainer implements Iterable<Ball> {
      * @return the volume of the contents of the container.
      */
     public double getVolume() {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        return totalVolume;
     }
 
     /**
@@ -110,16 +131,16 @@ public class BallContainer implements Iterable<Ball> {
      * @return the number of Balls in this container.
      */
     public int size() {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        return amountBalls;
     }
 
     /**
      * Empties the container, i.e. removes all its contents.
      */
     public void clear() {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        contents.clear();
+        totalVolume = 0;
+        amountBalls = 0;
     }
 
     /**
@@ -132,8 +153,11 @@ public class BallContainer implements Iterable<Ball> {
      * @spec.requires b != null.
      */
     public boolean contains(Ball b) {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        if (b != null) {
+            return contents.contains(b);
+        } else {
+            throw new IllegalArgumentException("Cannot check if a null ball is in container.");
+        }
     }
 
 }

@@ -37,7 +37,7 @@ public class Ball {
      * @return the volume of the Ball.
      */
     public double getVolume() {
-        return 0;
+        return volume;
     }
 
 }

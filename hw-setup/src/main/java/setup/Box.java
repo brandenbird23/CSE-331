@@ -12,7 +12,9 @@
 package setup;
 
 import java.lang.Iterable;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 /**
  * This is a container can be used to contain Balls. The key
@@ -25,6 +27,7 @@ public class Box implements Iterable<Ball> {
      * ballContainer is used to internally store balls for this Box.
      */
     private BallContainer ballContainer;
+    private double maxVolume; // to store the max volume in box
 
     /**
      * Constructor that creates a new box.
@@ -32,8 +35,8 @@ public class Box implements Iterable<Ball> {
      * @param maxVolume Total volume of balls that this box can contain.
      */
     public Box(double maxVolume) {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        ballContainer = new BallContainer();
+        this.maxVolume = maxVolume;
     }
 
     /**
@@ -64,8 +67,15 @@ public class Box implements Iterable<Ball> {
      * @spec.requires b != null.
      */
     public boolean add(Ball b) {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        if (b != null) {
+            if (getVolume() + b.getVolume() > maxVolume || contains(b)) {
+                return false;
+            } else {
+                return ballContainer.add(b);
+            }
+        } else {
+            throw new IllegalArgumentException("Cannot add a null ball");
+        }
     }
 
     /**
@@ -77,8 +87,12 @@ public class Box implements Iterable<Ball> {
      * ascending size.
      */
     public Iterator<Ball> getBallsFromSmallest() {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        // TreeSet used with ballComparator method to sort the balls
+        TreeSet<Ball> sortedBalls = new TreeSet<>(new ballComparator());
+        for (Ball b : ballContainer) {
+            sortedBalls.add(b);
+        }
+        return sortedBalls.iterator();
     }
 
     /**
@@ -137,4 +151,23 @@ public class Box implements Iterable<Ball> {
         return ballContainer.contains(b);
     }
 
+    /**
+     * Inner ballComparator class that allows for a comparison of
+     * balls based on volume. Sorts in ascending order.
+     */
+    public static class ballComparator implements Comparator<Ball> {
+        /**
+         * Compares the volume of two balls to determine the proper ordering.
+         * Returns a negative number if the first balls volyme is less than
+         * the seconds, a 0 if they are equal, and a positive number if the
+         * first ball is greater
+         *
+         * @param b1 first ball to compare
+         * @param b2 second ball to compare
+         * @return negative, zero, or positive number depending on comparison outcome.
+         */
+        public int compare(Ball b1, Ball b2) {
+            return Double.compare(b1.getVolume(), b2.getVolume());
+        }
+    }
 }
