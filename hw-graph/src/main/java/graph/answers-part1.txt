@@ -1,0 +1,21 @@
+## CSE 331 hw-graph Part 1 Questions
+
+## Part 1
+###########################################################################
+
+Briefly explain why you included the operations you did and why you feel they are a sufficient
+interface to a graph. If your design includes multiple classes or interfaces, explain why you
+included each one; if not, explain whether you considered additional classes and why you decided
+not to include them.
+
+
+
+
+## Part 2
+###########################################################################
+
+What was your testing strategy for this assignment? How do your script tests and JUnit tests
+differ from each other (if they do), and why?
+
+
+
