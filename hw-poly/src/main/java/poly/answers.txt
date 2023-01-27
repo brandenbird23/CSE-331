@@ -3,31 +3,76 @@
 ###########################################################################
 
 1. Multiplication Pseudocode
-
+result = p * q
+copy all terms from q to result
+{inv: result contains correct product of all terms processed so far}
+for each term t, in p:
+    multiply the coefficient of t with all terms in result
+    add the exponent of t to the exponent of all terms in result
+combine all terms in result and update the value of result
 
 
 2. Division Pseudocode
-
+set s = 0 and initialize a copy of p as r
+{inv: s contains sum of quotients and r contains remainder of p after dividing by q}
+while r != 0 and degree of r is >= to degree of q:
+    determine leading term of r / by leading term of q
+    assign that to t
+    add t to s
+    subtract the product of t and all the terms in q from r
+return value of s as the result and r as the remainder
 
 
 3. Division Example: (x3+x-1) / (x+1) = x2-x+2
+p = (x^3+x-1)
+q = (x+1)
+s = 0
+r = copy of p, r = (x^3+x-1)
+{inv: s contains sum of quotients and r contains remainder of p after dividing by q}
 
+Iteration 1:
+t = leading term of r / leading term of q (in this case, t = x^3/x = x^2)
+s = s + t = 0 + x^2 = x^2
+r = r - t * q = (x^3+x-1) - x^2 * (x+1) = -x^2 + x - 1
 
+Iteration 2:
+t = leading term of r / leading term of q (in this case, t = -x^2/x = -x)
+s = s + t = x^2 + -x = x^2 - x
+r = r - t * q = (-x^2+ x - 1) - (-x) * (x+1) = 2x - 1
+
+Iteration 3:
+t = leading term of r / leading term of q (in this case, t = 2x / x = 2)
+s = s + t = x^2 - x + 2
+r = r - t * q = (2x - 1) - 2 * (x+1) = -3
+
+The while loop is not satisfied anymore because r is not 0 and the degree of r
+is not greater or equal than degree of q.
+
+return value of s as the result, x^2 - x + 2, and r as the remainder, -3.
+
+So the result of this division is x^2 - x + 2 with a remainder of -3.
 
 
 ## Part 1
 ###########################################################################
 
 1. Weakened Rep Invariant
-
+Called in constructor after if-else statement to ensure object constructed
+satisfies the rep invariant.It is called at the beginning of all methods
+that change the objects state and before methods that return the objects
+state in case the objects state has been changed.
 
 
 2. Alternate add, sub, mul, div
-
+The changes to add, sub, mul, and div would fail because the methods would no
+longer be returning the new RatNum objects. They would be modifying the current
+object, which would violate the spec. And if they are final, this means they cannot
+be modified.
 
 
 3. Constructor checkReps
-
+Once the object is constructed and initialized, they cannot be modified. Also,
+before the constructor is called, nothing has been created yet.
 
 
 
@@ -35,14 +80,26 @@
 ###########################################################################
 
 1. Calls to checkRep in RatTerm
-
+I included the checkRep at the end of constructors since there are no mutator methods
+and the instance variables are final. I also added to the beginning and end of add, sub,
+mul, and div for added security.
 
 
 2. Weakened Rep Invariant
+The constructor would need to be modified to no longer check for the invarient on input.
+This would lead to invalid RatTerms though.
 
+The add, sub, mul, and div methods need to check a RatTerm with a zero coefficient but
+non zero exponents.
+
+This would make the code less clear and more complex but also more flexible and handle
+a wider range of inputs.
 
 
 3. Alternate Rep Invariant
+The constructor would need to check if coefficient passed in is NaN, if so set exponent to 0.
+This would make the class more consistent and easier to understand as all NaN terms would have
+an exponent of 0.
 
 
 
@@ -55,10 +112,23 @@
 ###########################################################################
 
 1. Calls to checkRep in RatPoly
+I included the checkRep at the end of constructors since there are no mutator methods
+and the instance variables are final. I also added to the beginning and end of add, sub,
+mul, and div for added security.
 
 
 
 2. Alternate Representation
+Advantages:
+The rep would be more memory efficient, eliminating redundant stored information.
+The code may be easier to understand if implemented correctly.
+Allows for faster operations since methods like add and mul wont have to iterate
+through a list of RatTerms.
 
+Disadvantages:
+The code could become more complex, as in making sure the code will stay in sync
+The code may need additional error handing to ensure no out of bounds errors or
+to handle case where a coefficient or exponent is missing.
+NaN and zero coefficients might be harder to handle as compared to RatTerm representations
 
 

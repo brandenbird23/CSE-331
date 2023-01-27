@@ -75,8 +75,22 @@ public final class RatTerm {
      * then t.expt = 0, otherwise t.expt = e.
      */
     public RatTerm(RatNum c, int e) {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.constructor is not yet implemented");
+        // check if the coefficient is not null
+        if (c != null) {
+            // Check if the coefficient is zero
+            if (c.equals(RatNum.ZERO)) {
+                this.coeff = RatNum.ZERO;
+                this.expt = 0;
+            } else {
+                this.coeff = c;
+                this.expt = e;
+            }
+            //check the rep invariant
+            checkRep();
+        } else {
+            // coefficient is null so throw exception
+            throw new IllegalArgumentException("Cannot be null");
+        }
     }
 
     /**
@@ -93,8 +107,7 @@ public final class RatTerm {
      * @return the coefficient of this RatTerm.
      */
     public RatNum getCoeff() {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.getCoeff() is not yet implemented");
+        return this.coeff;
     }
 
     /**
@@ -103,8 +116,7 @@ public final class RatTerm {
      * @return the exponent of this RatTerm.
      */
     public int getExpt() {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.getExpt() is not yet implemented");
+        return this.expt;
     }
 
     /**
@@ -113,8 +125,7 @@ public final class RatTerm {
      * @return true if and only if this has NaN as a coefficient.
      */
     public boolean isNaN() {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.isNaN() is not yet implemented");
+        return this.coeff.isNaN();
     }
 
     /**
@@ -123,8 +134,7 @@ public final class RatTerm {
      * @return true if and only if this has zero as a coefficient.
      */
     public boolean isZero() {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.isZero() is not yet implemented");
+        return this.coeff.equals(RatNum.ZERO);
     }
 
     /**
@@ -135,9 +145,11 @@ public final class RatTerm {
      * is 12. if (this.isNaN() == true), return Double.NaN.
      */
     public double eval(double d) {
-        // TODO: Fill in this method, then remove the RuntimeException
-        // Hint: You may find java.lang.Math's pow() method useful.
-        throw new RuntimeException("RatTerm.eval() is not yet implemented");
+        if (this.isNaN() == true) {
+            return Double.NaN;
+        } else {
+            return this.coeff.doubleValue() * Math.pow(d, this.expt);
+        }
     }
 
     /**
@@ -146,8 +158,7 @@ public final class RatTerm {
      * @return a RatTerm equals to (-this). If this is NaN, then returns NaN.
      */
     public RatTerm negate() {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.negate() is not yet implemented");
+        return new RatTerm(this.coeff.negate(), this.expt);
     }
 
     /**
@@ -160,8 +171,28 @@ public final class RatTerm {
      * @spec.requires arg != null
      */
     public RatTerm add(RatTerm arg) {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.add() is not yet implemented");
+        checkRep(); // make sure in consistent state
+        // Check if the arg is not null
+        if (arg != null) {
+            if (this.isNaN() || arg.isNaN()) {
+                return new RatTerm(RatNum.NaN, this.expt);
+            } else if (this.isZero()) {
+                // 0 + a*x^b = a*x^b
+                return new RatTerm(arg.coeff, arg.expt);
+            } else if (arg.isZero()) {
+                // a*x^b + 0 = a*x^b
+                return new RatTerm(this.coeff, this.expt);
+            } else if (this.expt != arg.expt) {
+                throw new IllegalArgumentException("Argument arg must have the same" +
+                        "exponent as the 'this' term");
+            } // (a*x^c) + (b*x^c) = (a+b)*x^c
+            RatNum newCoeff = this.coeff.add(arg.coeff);
+            RatTerm result = new RatTerm(newCoeff, this.expt);
+            checkRep(); // will be called every time add method is invoked
+            return result;
+        } else {
+            throw new IllegalArgumentException("Argument cannot be null");
+        }
     }
 
     /**
@@ -174,8 +205,28 @@ public final class RatTerm {
      * @spec.requires arg != null
      */
     public RatTerm sub(RatTerm arg) {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.sub() is not yet implemented");
+        checkRep(); // make sure in consistent state
+        // Check if the argument is not null
+        if (arg != null) {
+            if (this.isNaN() || arg.isNaN()) {
+                return new RatTerm(RatNum.NaN, this.expt);
+            } else if (this.isZero()) {
+                // 0 - a*x^b = -a*x^b
+                return new RatTerm(arg.coeff.negate(), arg.expt);
+            } else if (arg.isZero()) {
+                // a * x^b - 0 = a*^b
+                return new RatTerm(this.coeff, this.expt);
+            } else if (this.expt != arg.expt) {
+                throw new IllegalArgumentException("Argument arg must have the same" +
+                        "exponent as the 'this' term");
+            } // (a*x^c) - (b*x^c) = (a-b)*x^c
+            RatNum newCoeff = this.coeff.sub(arg.coeff);
+            RatTerm result = new RatTerm(newCoeff, this.expt);
+            checkRep(); // will be called every time sub method is invoked
+            return result;
+        } else {
+            throw new IllegalArgumentException("Argument cannot be null");
+        }
     }
 
     /**
@@ -186,8 +237,23 @@ public final class RatTerm {
      * @spec.requires arg != null.
      */
     public RatTerm mul(RatTerm arg) {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.mul() is not yet implemented");
+        checkRep(); // make sure in consistent state
+        // Check if the argument is not null
+        if(arg != null) {
+            if (this.isNaN() || arg.isNaN()) {
+                return new RatTerm(RatNum.NaN, this.expt);
+            } else if (this.isZero() || arg.isZero()) {
+                // 0 * a*x^b = 0
+                return new RatTerm(RatNum.ZERO, 0);
+            } else {
+                // (a*x^c) * (b*x^d) = (a*b)*x^(c+d)
+                RatTerm result = new RatTerm(this.coeff.mul(arg.coeff), this.expt + arg.expt);
+                checkRep(); //  will be called every time mul method is invoked
+                return result;
+            }
+        } else {
+            throw new IllegalArgumentException("Argument cannot be null");
+        }
     }
 
     /**
@@ -199,8 +265,27 @@ public final class RatTerm {
      * @spec.requires arg != null
      */
     public RatTerm div(RatTerm arg) {
-        // TODO: Fill in this method, then remove the RuntimeException
-        throw new RuntimeException("RatTerm.div() is not yet implemented");
+        checkRep(); // make sure in consistent state
+        // check if the argument is not null
+        if (arg != null) {
+            if (this.isNaN() || arg.isNaN()) {
+                return new RatTerm(RatNum.NaN, this.expt);
+            } else if (arg.isZero()) {
+                return new RatTerm(RatNum.NaN, this.expt);
+            } else if (this.isZero()) {
+                // 0 / a*x^b = 0
+                return new RatTerm(RatNum.ZERO, 0);
+            } else {
+                // (a*x^c) / (b*x^d) = (a/b)*x^(c-d)
+                RatNum quotient = this.coeff.div(arg.coeff);
+                int newExpt = this.expt - arg.expt;
+                RatTerm result = new RatTerm(quotient, newExpt);
+                checkRep(); // will be called every time div method is invoked
+                return result;
+            }
+        } else {
+            throw new IllegalArgumentException("Argument cannot be null");
+        }
     }
 
     /**
