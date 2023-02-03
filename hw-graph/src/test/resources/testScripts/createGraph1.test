@@ -1,0 +1,6 @@
+# Create Graph Test File
+# Test to create a graph
+CreateGraph graph1
+
+# Print the nodes in the graph
+ListNodes graph1

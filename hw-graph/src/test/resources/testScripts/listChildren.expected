@@ -1,0 +1,15 @@
+# listChildren expected file
+# tests if listChildren can be added to graph
+
+# create graph
+created graph graph1
+
+# create node
+added node node1 to graph1
+
+# create edge
+added edge edge1 from node1 to node1 in graph1
+
+# Print the nodes in graph
+graph1 contains: node1
+the children of node1 in graph1 are: node1(edge1)

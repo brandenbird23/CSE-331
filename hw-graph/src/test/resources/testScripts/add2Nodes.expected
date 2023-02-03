@@ -1,0 +1,12 @@
+# add2Nodes Expected File
+# tests if 2 nodes can be added to a graph
+
+# Create a graph
+created graph graph1
+
+# Create 2 nodes
+added node node1 to graph1
+added node node2 to graph1
+
+# print the nodes in graph
+graph1 contains: node1 node2

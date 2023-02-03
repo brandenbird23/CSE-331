@@ -1,0 +1,15 @@
+# add2Edge expected file
+# tests if an edge can be added to a graph
+
+# Create a graph
+created graph graph1
+
+# Create a node
+added node1 to graph1
+
+# Create an edge
+added edge edge1 from node1 to node1 in graph1
+added edge edge2 from node1 to node1 in graph1
+
+# Print the nodes in the graph
+graph1 contains: node1

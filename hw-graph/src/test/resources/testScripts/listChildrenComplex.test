@@ -1,0 +1,19 @@
+# listChildrenComplex test file
+# tests if listChildren stays consistent
+
+# create a graph
+CreateGraph graph1
+
+# create a node
+AddNode graph1 node1
+AddNode graph1 node2
+
+# create an edge
+AddEdge graph1 node1 node1 edge1
+AddEdge graph1 node1 node1 edge2
+AddEdge graph1 node1 node2 edge3
+AddEdge graph1 node1 node2 edge4
+
+# print the nodes in the graph
+ListNodes graph1
+ListChildren graph1 node1

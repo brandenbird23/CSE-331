@@ -1,0 +1,14 @@
+# listNodes Test File
+# tests if you can list nodes in multiple graphs
+
+# Create graphs
+created graph graph1
+created graph graph2
+
+# Create Node
+added node node1 to graph1
+added node node1 to graph2
+
+# Print the node in the graphs
+graph1 contains: node1
+graph2 contains: node1

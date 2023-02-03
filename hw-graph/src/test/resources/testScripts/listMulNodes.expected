@@ -1,0 +1,13 @@
+# listMulNodes expected file
+# tests if you can put multiple nodes in one graph
+
+# create a graph
+created graph graph1
+
+# create nodes
+added node node1 to graph1
+added node node2 to graph1
+added node node3 to graph1
+
+# Print the nodes in the graph
+graph1 contains: node1 node2 node3

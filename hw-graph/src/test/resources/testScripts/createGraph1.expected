@@ -1,0 +1,6 @@
+# Create Graph Expected File
+# Test to create a graph
+created graph graph1
+
+# Print the nodes in the graph
+graph1 contains:

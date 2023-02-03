@@ -8,7 +8,10 @@ interface to a graph. If your design includes multiple classes or interfaces, ex
 included each one; if not, explain whether you considered additional classes and why you decided
 not to include them.
 
-
+Since this graph will be multi-directional and labeled, I created a base graph class with edge class
+as well. With these, I will also utilize nodes so i created addNode, addEdge, listNodes, listChildren,
+listEdges and also methods for total of these. addNode and addEdge are needed to build the graph, and
+the other methods are utilized if the user wants information in regard to the graph.
 
 
 ## Part 2
@@ -17,5 +20,6 @@ not to include them.
 What was your testing strategy for this assignment? How do your script tests and JUnit tests
 differ from each other (if they do), and why?
 
-
+With the script tests, I tested things that should occur, and for my JUnit tests i tested things
+that should not occur. JUnit tests are a little simpler and cover most specific cases.
 

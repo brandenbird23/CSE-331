@@ -1,0 +1,8 @@
+# Create 2 Graphs Test File
+# Test to create 2 graphs
+CreateGraph graph1
+CreateGraph graph2
+
+# Print the nodes in the graph
+ListNodes graph1
+ListNodes graph2

@@ -1,0 +1,19 @@
+# listChildrenComplex expected file
+# tests if listChildren stays consistent
+
+# create a graph
+created graph graph1
+
+# create a node
+added node node1 to graph1
+added node node2 to graph2
+
+# create an edge
+added edge edge1 from node1 to node1 in graph1
+added edge edge2 from node1 to node1 in graph1
+added edge edge3 from node1 to node2 in graph1
+added edge edge4 from node1 to node2 in graph1
+
+# print the nodes in the graph
+graph1 contains: node1 node2
+the children of node1 in graph1 are: node1(edge1) node1(edge2) node2(edge3) node2(edge4)

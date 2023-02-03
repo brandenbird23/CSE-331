@@ -1,0 +1,11 @@
+# addNode1 Expected File
+# tests if node can be added to a graph
+
+# Create graph
+created graph graph1
+
+# Create a node
+added node node1 to graph1
+
+# Print the nodes in graph
+graph1 contains: node1
