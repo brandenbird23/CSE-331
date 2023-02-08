@@ -1,5 +1,8 @@
 package graph;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -7,14 +10,17 @@ import java.util.Set;
  * a set of edges.
  */
 public class Graph<T, E> {
+    private static final boolean DEBUG = false;
+    private Map<T, HashSet<Edge>> graph;
+    private int totalEdges = 0;
 
     /**
      * Constructs a new graph
      * @spec.effects this
      */
     public Graph(){
-        // TODO [create constructor]
-        throw new RuntimeException("Constructor has not been created yet");
+        this.graph = new HashMap<>();
+        checkRep();
     }
 
     /**
@@ -26,8 +32,17 @@ public class Graph<T, E> {
      * @throws IllegalArgumentException if nodeName already exists
      */
     public void addNode(T nodeName) {
-        // TODO [create method]
-        throw new RuntimeException("addNode has not been implemented");
+        checkRep();
+        if (nodeName != null) {
+            if(!(this.graph.containsKey(nodeName))) {
+                this.graph.put(nodeName, new HashSet<>());
+            } else {
+                throw new IllegalArgumentException("Node already exists");
+            }
+        } else {
+            throw new IllegalArgumentException("Node cannot be null");
+        }
+        checkRep();
     }
 
     /**
@@ -45,8 +60,24 @@ public class Graph<T, E> {
      * or if label already exists.
      */
     public void addEdge(T parent, T child, E label) {
-        // TODO [create method]
-        throw new RuntimeException("addEdge has not been implemented");
+        checkRep();
+        if (parent == null || child == null || label == null) {
+            throw new IllegalArgumentException("Node and label cannot be null");
+        } else if (!(this.graph.containsKey(parent))) {
+            throw new IllegalArgumentException("Parent node is not found in the graph");
+        } else if (!(this.graph.containsKey(child))) {
+            throw new IllegalArgumentException("Child node is not found in the graph");
+        } else {
+            // check if to be added is a duplicate
+            Edge edge1 = new Edge(parent, child, label);
+            if(this.graph.get(parent).contains(edge1)) {
+                throw new IllegalArgumentException("Edge already exists");
+            } else {
+                this.graph.get(parent).add(edge1);
+                this.totalEdges++;
+                checkRep();
+            }
+        }
     }
 
     /**
@@ -54,8 +85,8 @@ public class Graph<T, E> {
      * @return set of Nodes in graph, empty if no nodes
      */
     public Set<T> listNodes() {
-        // TODO [create method]
-        throw new RuntimeException("listNodes has not been implemented");
+        checkRep();
+        return new HashSet<T>(this.graph.keySet());
     }
 
     /**
@@ -78,7 +109,7 @@ public class Graph<T, E> {
      * @return set if all edges to the given node, empty if no edges
      * @throws IllegalArgumentException if graph does not contain given node
      */
-    public Set<Edge<T, E>> listEdges(T node) {
+    public Set<Edge> listEdges(T node) {
         // TODO [create method]
         throw new RuntimeException("listEdges has not been implemented");
     }
@@ -115,8 +146,19 @@ public class Graph<T, E> {
 
 
     private void checkRep() {
-        // TODO [create method]
-        throw new RuntimeException("checkRep has not been implemented");
+        assert (this.graph != null) : "graph can't be null";
+        assert (!(this.graph.containsKey(null)));
+        if (DEBUG) {
+            for (T node : this.graph.keySet()) assert (node != null) : "nodes cannot be null";
+            for (T node : this.graph.keySet()){
+                HashSet<Edge> edgeSet = this.graph.get(node);
+                assert (this.graph.get(node) != null) : "nodes must not have null edges";
+                for (Edge edge : edgeSet) {
+                    assert (edge != null) : "graph cannot have null edges";
+                    assert (graph.containsKey(edge.getChild())) : "graph must have child node";
+                }
+            }
+        }
     }
 
     /**
@@ -124,8 +166,8 @@ public class Graph<T, E> {
      * @return true if graph has no nodes, false if has nodes
      */
     public boolean isEmpty() {
-        // TODO [create method]
-        throw new RuntimeException("isEmpty has not been implemented");
+        checkRep();
+        return this.graph.isEmpty();
     }
 
     /**
@@ -133,8 +175,9 @@ public class Graph<T, E> {
      * @spec.modifies this
      */
     public void clear() {
-        // TODO [create method}
-        throw new RuntimeException("clear has not been implemented");
+        checkRep();
+        this.graph.clear();
+        checkRep();
     }
 
 
@@ -142,7 +185,7 @@ public class Graph<T, E> {
      * This class represents a single, immutable edge. An edge points to
      * an end node from starter node. Edges also store the label.
      */
-    public class Edge<T, E> {
+    public class Edge {
         /**
          * Create edge with parent and child node and a label
          * @param parent starting node

@@ -19,3 +19,7 @@ task junitTests(type: Test) {
     includeTestsMatching "graph.junitTests.*"
   }
 }
+
+dependencies {
+    testImplementation 'junit:junit:4.13.1'
+}

@@ -1,10 +1,14 @@
 package graph.junitTests;
 
-import graph.*;
+import graph.Graph;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 /**
@@ -22,7 +26,7 @@ public class GraphTests {
 
     @Test
     public void testGraph() {
-        assertTrue(graph1.isEmpty());
+        assertTrue(this.graph1.isEmpty());
     }
 
 
@@ -32,9 +36,12 @@ public class GraphTests {
 
     @Test
     public void testAddNode() {
-        graph1.addNode("node1");
-        assertNotNull(graph1);
-        assertEquals(Arrays.asList("node1"), graph1.listNodes());
+        this.graph1.addNode("node1");
+        assertNotNull(this.graph1);
+        Set<String> node = this.graph1.listNodes();
+        Set<String> expected = new HashSet<>();
+        expected.add("node1");
+        assertEquals(expected, node);
     }
 
     @Test
@@ -42,8 +49,11 @@ public class GraphTests {
         graph1.addNode("node1");
         graph1.addNode("node2");
         assertNotNull(graph1);
-        assertEquals(Arrays.asList("node1", "node2"),
-                graph1.listNodes());
+        Set<String> nodes = this.graph1.listNodes();
+        Set<String> expected = new HashSet<>();
+        expected.add("node1");
+        expected.add("node2");
+        assertEquals(expected, nodes);
     }
 
     @Test (expected = RuntimeException.class)
