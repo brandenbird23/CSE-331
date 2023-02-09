@@ -69,14 +69,17 @@ public class Graph<T, E> {
             throw new IllegalArgumentException("Child node is not found in the graph");
         } else {
             // check if to be added is a duplicate
-            Edge edge1 = new Edge(parent, child, label);
-            if(this.graph.get(parent).contains(edge1)) {
-                throw new IllegalArgumentException("Edge already exists");
-            } else {
-                this.graph.get(parent).add(edge1);
-                this.totalEdges++;
-                checkRep();
+            Set<Edge> edges = this.graph.get(parent);
+            for (Edge edge : edges) {
+                if (edge.getChild().equals(child) && edge.getLabel().equals(label)
+                && edge.getParent().equals(parent)) {
+                    throw new IllegalArgumentException("Edge already exists");
+                }
             }
+            Edge edge = new Edge(parent, child, label);
+            this.graph.get(parent).add(edge);
+            this.totalEdges++;
+            checkRep();
         }
     }
 
@@ -98,8 +101,17 @@ public class Graph<T, E> {
      * @throws IllegalArgumentException if graph does not contain given parent node
      */
     public Set<T> listChildren(T parent) {
-        // TODO [create method]
-        throw new RuntimeException("listChildren has not been implemented");
+        checkRep();
+        if(!(this.graph.containsKey(parent))) {
+            throw new IllegalArgumentException("The given node is not found");
+        } else {
+            Set<T> child = new HashSet<>();
+            for (Edge edge : this.graph.get(parent)) {
+                child.add(edge.getChild());
+            }
+            checkRep();
+            return child;
+        }
     }
 
     /**
@@ -110,8 +122,14 @@ public class Graph<T, E> {
      * @throws IllegalArgumentException if graph does not contain given node
      */
     public Set<Edge> listEdges(T node) {
-        // TODO [create method]
-        throw new RuntimeException("listEdges has not been implemented");
+        checkRep();
+        if (node == null) {
+            throw new IllegalArgumentException("Node cannot be null");
+        } else if (!(this.graph.containsKey(node))) {
+            throw new IllegalArgumentException("Graph does not contain the given node");
+        } else {
+            return new HashSet<>(this.graph.get(node));
+        }
     }
 
     /**
@@ -122,8 +140,23 @@ public class Graph<T, E> {
      * @return the num of edges between parent and child node
      */
     public int totalNumEdges(T parent, T child) {
-        // TODO [create method]
-        throw new RuntimeException("totalNumEdges has not been implemented");
+        checkRep();
+        if (parent == null || child == null) {
+            throw new IllegalArgumentException("A given node cannot be null");
+        } else if (!(this.graph.containsKey(parent))) {
+            throw new IllegalArgumentException("Parent node was not found in the graph");
+        } else if (!(this.graph.containsKey(child))) {
+            throw new IllegalArgumentException("Child node was not found in the graph");
+        } else {
+            int counter = 0;
+            for (Edge edge : this.graph.get(parent)) {
+                if (edge.getChild().equals(child)) {
+                    counter++;
+                }
+            }
+            checkRep();
+            return counter;
+        }
     }
 
     /**
@@ -131,8 +164,8 @@ public class Graph<T, E> {
      * @return the number of nodes in the graph
      */
     public int totalNodes() {
-        // TODO [create method]
-        throw new RuntimeException("totalNodes has not been implemented");
+        checkRep();
+        return this.graph.size();
     }
 
     /**
@@ -140,8 +173,8 @@ public class Graph<T, E> {
      * @return the number of edges in the graph
      */
     public int totalEdges() {
-        // TODO [create method]
-        throw new RuntimeException("totalEdges has not been implemented");
+        checkRep();
+        return this.totalEdges;
     }
 
 
@@ -186,17 +219,30 @@ public class Graph<T, E> {
      * an end node from starter node. Edges also store the label.
      */
     public class Edge {
+        private T parent;
+        private T child;
+        private E label;
         /**
          * Create edge with parent and child node and a label
          * @param parent starting node
          * @param child ending node
          * @param label label of the edge
-         * @spec.requires child, label != null
+         * @spec.requires child, parent, label != null
          * @throws IllegalArgumentException if null
          */
         public Edge(T parent, T child, E label) {
-            // TODO [create method]
-            throw new RuntimeException("Edge has not been implemented");
+            if (parent == null) {
+                throw new IllegalArgumentException("The parent cannot be null");
+            } else if (child == null) {
+                throw new IllegalArgumentException("The child cannot be null");
+            } else if (label == null) {
+                throw new IllegalArgumentException("The label cannot be null");
+            } else {
+                this.parent = parent;
+                this.child = child;
+                this.label = label;
+            }
+            checkRep();
         }
 
         /**
@@ -204,8 +250,8 @@ public class Graph<T, E> {
          * @return parent of edge
          */
         public T getParent() {
-            // TODO [create method]
-            throw new RuntimeException("getParent has not been implemented");
+            checkRep();
+            return this.parent;
         }
 
         /**
@@ -213,8 +259,8 @@ public class Graph<T, E> {
          * @return child of edge
          */
         public T getChild() {
-            // TODO [create method]
-            throw new RuntimeException("getChild has not been implemented");
+            checkRep();
+            return this.child;
         }
 
         /**
@@ -222,8 +268,8 @@ public class Graph<T, E> {
          * @return label of edge
          */
         public E getLabel() {
-            // TODO [create method]
-            throw new RuntimeException("getLabel has not been implemented");
+            checkRep();
+            return this.label;
         }
     }
 }
