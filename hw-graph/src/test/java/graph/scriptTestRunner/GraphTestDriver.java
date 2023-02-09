@@ -131,7 +131,8 @@ public class GraphTestDriver {
     }
 
     private void addNode(String graphName, String nodeName) {
-        Graph<String, String> graph = graphs.get(graphName);
+        Graph<String, String> graph = new Graph<>();
+        graphs.get(graphName);
         graph.addNode(nodeName);
         output.println("added node " + nodeName + " to " + graphName);
     }
@@ -151,7 +152,8 @@ public class GraphTestDriver {
 
     private void addEdge(String graphName, String parentName, String childName,
                          String edgeLabel) {
-        Graph<String, String> graph = graphs.get(graphName);
+        Graph<String, String> graph = new Graph<>();
+        graphs.get(graphName);
         graph.addEdge(parentName, childName, edgeLabel);
         output.println("added edge " + edgeLabel + " from " + parentName +
                 " to " + childName + " in " + graphName);
@@ -167,7 +169,8 @@ public class GraphTestDriver {
     }
 
     private void listNodes(String graphName) {
-        Graph<String, String> graph = graphs.get(graphName);
+        Graph<String, String> graph = new Graph<>();
+        graphs.get(graphName);
         Set<String> nodes = new TreeSet<>(graph.listNodes());
         String nodeList = graphName + " contains:";
         for (String node : nodes) {
@@ -187,7 +190,8 @@ public class GraphTestDriver {
     }
 
     private void listChildren(String graphName, String parentName) {
-        Graph<String, String> graph = graphs.get(graphName);
+        Graph<String, String> graph = new Graph<>();
+        graphs.get(graphName);
         List<String> children = new ArrayList<>(graph.listChildren(parentName));
         Collections.sort(children);
         StringBuilder list = new StringBuilder(("The children of " + parentName + " in " + graphName + " are: "));
