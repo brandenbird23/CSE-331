@@ -10,7 +10,7 @@ import java.util.Set;
  * a set of edges.
  */
 public class Graph<T, E> {
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private Map<T, HashSet<Edge>> graph;
     private int totalEdges = 0;
 
@@ -20,7 +20,9 @@ public class Graph<T, E> {
      */
     public Graph(){
         this.graph = new HashMap<>();
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
     }
 
     /**
@@ -32,7 +34,9 @@ public class Graph<T, E> {
      * @throws IllegalArgumentException if nodeName already exists
      */
     public void addNode(T nodeName) {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         if (nodeName != null) {
             if(!(this.graph.containsKey(nodeName))) {
                 this.graph.put(nodeName, new HashSet<>());
@@ -42,7 +46,9 @@ public class Graph<T, E> {
         } else {
             throw new IllegalArgumentException("Node cannot be null");
         }
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
     }
 
     /**
@@ -60,7 +66,9 @@ public class Graph<T, E> {
      * or if label already exists.
      */
     public void addEdge(T parent, T child, E label) {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         if (parent == null || child == null || label == null) {
             throw new IllegalArgumentException("Node and label cannot be null");
         } else if (!(this.graph.containsKey(parent))) {
@@ -79,7 +87,9 @@ public class Graph<T, E> {
             Edge edge = new Edge(parent, child, label);
             this.graph.get(parent).add(edge);
             this.totalEdges++;
-            checkRep();
+            if (DEBUG) {
+                checkRep();
+            }
         }
     }
 
@@ -88,7 +98,9 @@ public class Graph<T, E> {
      * @return set of Nodes in graph, empty if no nodes
      */
     public Set<T> listNodes() {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         return new HashSet<T>(this.graph.keySet());
     }
 
@@ -101,7 +113,9 @@ public class Graph<T, E> {
      * @throws IllegalArgumentException if graph does not contain given parent node
      */
     public Set<T> listChildren(T parent) {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         if(!(this.graph.containsKey(parent))) {
             throw new IllegalArgumentException("The given node is not found");
         } else {
@@ -109,7 +123,9 @@ public class Graph<T, E> {
             for (Edge edge : this.graph.get(parent)) {
                 child.add(edge.getChild());
             }
-            checkRep();
+            if (DEBUG) {
+                checkRep();
+            }
             return child;
         }
     }
@@ -122,7 +138,9 @@ public class Graph<T, E> {
      * @throws IllegalArgumentException if graph does not contain given node
      */
     public Set<Edge> listEdges(T node) {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         if (node == null) {
             throw new IllegalArgumentException("Node cannot be null");
         } else if (!(this.graph.containsKey(node))) {
@@ -140,7 +158,9 @@ public class Graph<T, E> {
      * @return the num of edges between parent and child node
      */
     public int totalNumEdges(T parent, T child) {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         if (parent == null || child == null) {
             throw new IllegalArgumentException("A given node cannot be null");
         } else if (!(this.graph.containsKey(parent))) {
@@ -154,7 +174,9 @@ public class Graph<T, E> {
                     counter++;
                 }
             }
-            checkRep();
+            if (DEBUG) {
+                checkRep();
+            }
             return counter;
         }
     }
@@ -164,7 +186,9 @@ public class Graph<T, E> {
      * @return the number of nodes in the graph
      */
     public int totalNodes() {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         return this.graph.size();
     }
 
@@ -173,7 +197,9 @@ public class Graph<T, E> {
      * @return the number of edges in the graph
      */
     public int totalEdges() {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         return this.totalEdges;
     }
 
@@ -196,10 +222,12 @@ public class Graph<T, E> {
 
     /**
      * Returns if graph is empty or not
-     * @return true if graph has no nodes, false if has nodes
+     * @return true if graph has no nodes, false if graph has nodes
      */
     public boolean isEmpty() {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         return this.graph.isEmpty();
     }
 
@@ -208,9 +236,13 @@ public class Graph<T, E> {
      * @spec.modifies this
      */
     public void clear() {
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
         this.graph.clear();
-        checkRep();
+        if (DEBUG) {
+            checkRep();
+        }
     }
 
 
@@ -242,7 +274,9 @@ public class Graph<T, E> {
                 this.child = child;
                 this.label = label;
             }
-            checkRep();
+            if (DEBUG) {
+                checkRep();
+            }
         }
 
         /**
@@ -250,7 +284,6 @@ public class Graph<T, E> {
          * @return parent of edge
          */
         public T getParent() {
-            checkRep();
             return this.parent;
         }
 
@@ -259,7 +292,6 @@ public class Graph<T, E> {
          * @return child of edge
          */
         public T getChild() {
-            checkRep();
             return this.child;
         }
 
@@ -268,7 +300,9 @@ public class Graph<T, E> {
          * @return label of edge
          */
         public E getLabel() {
-            checkRep();
+            if (DEBUG) {
+                checkRep();
+            }
             return this.label;
         }
     }

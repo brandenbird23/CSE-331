@@ -172,9 +172,9 @@ public class GraphTestDriver {
         Graph<String, String> graph = new Graph<>();
         graphs.get(graphName);
         Set<String> nodes = new TreeSet<>(graph.listNodes());
-        String nodeList = graphName + " contains:";
+        StringBuilder nodeList = new StringBuilder(graphName + " contains:");
         for (String node : nodes) {
-            nodeList += " " + node;
+            nodeList.append(" ").append(node);
         }
         output.println(nodeList);
     }
@@ -194,7 +194,7 @@ public class GraphTestDriver {
         graphs.get(graphName);
         List<String> children = new ArrayList<>(graph.listChildren(parentName));
         Collections.sort(children);
-        StringBuilder list = new StringBuilder(("The children of " + parentName + " in " + graphName + " are: "));
+        StringBuilder list = new StringBuilder(("the children of " + parentName + " in " + graphName + " are:"));
         for (String str : children) {
             list.append(" ").append(str);
         }
