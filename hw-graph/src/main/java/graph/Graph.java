@@ -7,16 +7,32 @@ import java.util.Set;
 
 /**
  * Graph is a mutable list of nodes. It consists of vertices and
- * a set of edges.
+ * a set of edges. The nodes are represented by type T and the edges
+ * are represented by type E. The edges connect the nodes together.
+ * A graph cannot contain duplicate nodes. Also, no two edges that share
+ * a parent and child node will have the same label, they will be different.
+ * The nodes cannot be null and edges for a given node cannot be null. Edges
+ * can start and end at the same node.
  */
 public class Graph<T, E> {
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private Map<T, HashSet<Edge>> graph;
     private int totalEdges = 0;
 
+    // Rep Invariant:
+    // graph != null
+    // every node and every edge != null
+    // no duplicate nodes
+    // graph must contain node if node is included in any edge of the graph
+    //
+    // Abstract Function:
+    // Graph g represents a map of nodes. each node has a set of edges that
+    // connect them to other nodes within the graph. the nodes are mapped as keys
+    // in a hashmap and their edges are stored as a hashset of edge objects in values.
+
     /**
      * Constructs a new graph
-     * @spec.effects this
+     * @spec.effects constructs a new empty graph
      */
     public Graph(){
         this.graph = new HashMap<>();
@@ -30,7 +46,7 @@ public class Graph<T, E> {
      * @param nodeName is the node being added
      * @spec.requires nodeName != null and does not already exist
      * @spec.effects adds a new node to the graph
-     * @spec.modifies this
+     * @spec.modifies this graph by adding a node
      * @throws IllegalArgumentException if nodeName already exists
      */
     public void addNode(T nodeName) {
@@ -61,7 +77,7 @@ public class Graph<T, E> {
      * @spec.requires parent and child exist in the graph, parent, child,
      * and label != null, label does not already exist.
      * @spec.effects adds a new edge with parent and child node labeled with label
-     * @spec.modifies this
+     * @spec.modifies this graph by adding an edge with nodes
      * @throws IllegalArgumentException if graph does not contain either parent or child
      * or if label already exists.
      */
@@ -101,7 +117,7 @@ public class Graph<T, E> {
         if (DEBUG) {
             checkRep();
         }
-        return new HashSet<T>(this.graph.keySet());
+        return new HashSet<>(this.graph.keySet());
     }
 
     /**
@@ -146,6 +162,9 @@ public class Graph<T, E> {
         } else if (!(this.graph.containsKey(node))) {
             throw new IllegalArgumentException("Graph does not contain the given node");
         } else {
+            if (DEBUG) {
+                checkRep();
+            }
             return new HashSet<>(this.graph.get(node));
         }
     }
@@ -201,6 +220,29 @@ public class Graph<T, E> {
             checkRep();
         }
         return this.totalEdges;
+    }
+
+    /**
+     * Retrieves the labels for the parent and child nodes.
+     * @param parent node for parent label
+     * @param child node for child label
+     * @return a set of labels representing the edge between the parent and child
+     * @spec.requires both the parent and child are in the graph
+     */
+    public Set<E> getLabel(T parent, T child){
+        if (DEBUG) {
+            checkRep();
+        }
+        Set<E> labels = new HashSet<>();
+        for (Edge edge : graph.get(parent)) {
+            if (child.equals(edge.getChild())) {
+                labels.add(edge.getLabel());
+            }
+        }
+        if (DEBUG) {
+            checkRep();
+        }
+        return labels;
     }
 
 

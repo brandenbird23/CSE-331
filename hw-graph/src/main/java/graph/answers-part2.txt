@@ -17,14 +17,27 @@ A few examples of possible Graph representations:
 representations listed above (for example, in terms of runtime complexity, space
 complexity, or ease of implementation).
 
+A: This is the simplest form of representation. An advantage is that its easy to understand and
+implement and suitable for sparse graphs where the number of edges is smaller than the nodes.
+A disadvantage is that it can be slow when processing an algorithm since it requires to scan
+the edge list to determine if an edge exists between nodes.
 
+B: An advantage is that it has a low space complexity and is very fast to determine if there is
+an edge between two nodes. A disadvantage is that it is not very efficient to find all the neighbors
+of a node or compute the node.
+
+C: An advantage of this is that it is very fast to determine if there is an edge between two nodes
+and is also very fast to find the neighbors. A disadvantage is that adding or removing edges in
+an adjacency matrix can be time-consuming since it requires updating the entire matrix.
 
 
 2. In two to three sentences, describe the representation you chose and explain why you
 chose it. If you chose to use a different representation than one of the three we described
 above, be sure to list its advantages and disadvantages, too.
 
-
+I chose to use the second option, B, by using a HashMap and keys for nodes and a set of edges
+connecting to child nodes. It is an efficient way to represent the graph in my opinion and has
+a low space complexity and fast run time.
 
 
 ## Part 4
@@ -35,11 +48,12 @@ above, be sure to list its advantages and disadvantages, too.
 1. Describe any new tests you added and why you added them, or why you feel that your original
 tests alone are sufficient.
 
-
+I did not make any new tests as I thought the ones I had already come up with were sufficient.
+The methods that script test didn't cover were in my j unit tests.
 
 
 2. Did you make any changes to your specifications as you were implementing your Graph? (yes/no)
 If yes, describe your changes and why you made them.
 
-
+I did not change any of my specs, but I did add a few to improve the functionality.
 

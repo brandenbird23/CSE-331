@@ -11,5 +11,5 @@ AddNode graph1 node1
 AddEdge graph1 node1 node1 edge1
 AddEdge graph1 node1 node1 edge2
 
-# print the nodes in the graph
+# Print the nodes in the graph
 ListNodes graph1

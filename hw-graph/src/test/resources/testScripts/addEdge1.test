@@ -10,5 +10,5 @@ AddNode graph1 node1
 # Create an edge
 AddEdge graph1 node1 node1 edge1
 
-# print the nodes in the graph
+# Print the nodes in the graph
 ListNodes graph1

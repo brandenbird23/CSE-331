@@ -6,7 +6,7 @@ created graph graph1
 
 # create a node
 added node node1 to graph1
-added node node2 to graph2
+added node node2 to graph1
 
 # create an edge
 added edge edge1 from node1 to node1 in graph1

@@ -10,6 +10,6 @@ AddNode graph1 node1
 # create edge
 AddEdge graph1 node1 node1 edge1
 
-# print the nodes in graph
+# Print the nodes in graph
 ListNodes graph1
 ListChildren graph1 node1
