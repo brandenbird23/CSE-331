@@ -114,7 +114,7 @@ public class GraphTestDriver {
     }
 
     private void createGraph(String graphName) {
-        Graph<String, String> graph = graphs.get(graphName);
+        Graph<String, String> graph = new Graph<>();
         graphs.put(graphName, graph);
         output.println("created graph " + graphName);
     }
@@ -131,8 +131,7 @@ public class GraphTestDriver {
     }
 
     private void addNode(String graphName, String nodeName) {
-        Graph<String, String> graph = new Graph<>();
-        graphs.get(graphName);
+        Graph<String, String> graph = graphs.get(graphName);
         graph.addNode(nodeName);
         output.println("added node " + nodeName + " to " + graphName);
     }
@@ -152,8 +151,7 @@ public class GraphTestDriver {
 
     private void addEdge(String graphName, String parentName, String childName,
                          String edgeLabel) {
-        Graph<String, String> graph = new Graph<>();
-        graphs.get(graphName);
+        Graph<String, String> graph = graphs.get(graphName);
         graph.addEdge(parentName, childName, edgeLabel);
         output.println("added edge " + edgeLabel + " from " + parentName +
                 " to " + childName + " in " + graphName);
@@ -169,12 +167,12 @@ public class GraphTestDriver {
     }
 
     private void listNodes(String graphName) {
-        Graph<String, String> graph = new Graph<>();
-        graphs.get(graphName);
+        Graph<String, String> graph = graphs.get(graphName);
         Set<String> nodes = new TreeSet<>(graph.listNodes());
-        StringBuilder nodeList = new StringBuilder(graphName + " contains:");
+        String nodeList = (graphName + " contains:");
         for (String node : nodes) {
-            nodeList.append(" ").append(node);
+            nodeList += (" ");
+            nodeList += (node);
         }
         output.println(nodeList);
     }
@@ -190,15 +188,15 @@ public class GraphTestDriver {
     }
 
     private void listChildren(String graphName, String parentName) {
-        Graph<String, String> graph = new Graph<>();
-        graphs.get(graphName);
+        Graph<String, String> graph = graphs.get(graphName);
         List<String> children = new ArrayList<>(graph.listChildren(parentName));
         Collections.sort(children);
         StringBuilder list = new StringBuilder(("the children of " + parentName + " in " + graphName + " are:"));
         for (String str : children) {
-            list.append(" ").append(str);
+            list.append(" ");
+            list.append(str);
         }
-        output.println();
+        output.println(list);
     }
 
     /**

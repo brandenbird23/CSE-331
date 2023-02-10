@@ -1,7 +1,7 @@
 # listNodes test file
 # tests if you can list nodes in multiple graphs
 
-# Create graphs
+# Create Graphs
 created graph graph1
 created graph graph2
 
