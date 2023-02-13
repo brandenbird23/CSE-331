@@ -250,6 +250,21 @@ public class Graph<T, E> {
         checkRep();
     }
 
+    /**
+     * Checks if a given node is inside the graph
+     * @param node node to see if is in the graph
+     * @spec.requires node != null
+     * @return true if node is in the graph, false if not in the graph
+     * @throws IllegalArgumentException if node is null
+     */
+    public boolean containsNode(T node) {
+        checkRep();
+        if (node == null) {
+            throw new IllegalArgumentException("Node cannot be null");
+        }
+        return graph.containsKey(node);
+    }
+
 
     /**
      * This class represents a single, immutable edge. An edge points to

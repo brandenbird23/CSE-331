@@ -12,7 +12,7 @@
 package marvel;
 
 import java.io.*;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -28,12 +28,20 @@ public class MarvelParser {
      * @spec.requires filename is a valid file in the resources/data folder.
      */
     // TODO: Replace 'void' with the type you want the parser to produce
-    public static void parseData(String filename) {
+    public static Map<String, List<String>> parseData(String filename) {
         List<String> lines = readLines(filename);
 
-        // TODO: Complete this method. You'll need to:
-        //  - Split each line into its individual parts
-        //  - Collect the data into some convenient data structure(s) to return to the graph building code
+        Map<String, List<String>> comics = new HashMap<>();
+        for (String line : lines) {
+            String[] split = line.split(",");
+            String character = split[0];
+            String comic = split[1];
+
+            // add a character to list of characters for comic
+            // create new arraylist if not already present
+            comics.computeIfAbsent(comic, k -> new ArrayList<>()).add(character);
+        }
+        return comics;
     }
 
     /**
