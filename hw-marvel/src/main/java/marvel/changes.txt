@@ -2,3 +2,5 @@ Briefly list any changes you made to your graph class during hw-marvel,
 and why you made those changes.
 
 I added (containsNode) to my graph class to be used in the MarvelPath.
+
+Changed addEdge in graph to allow for duplicate edges.

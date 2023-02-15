@@ -84,14 +84,6 @@ public class Graph<T, E> {
         } else if (!(this.graph.containsKey(child))) {
             throw new IllegalArgumentException("Child node is not found in the graph");
         } else {
-            // check if to be added is a duplicate
-            Set<Edge> edges = this.graph.get(parent);
-            for (Edge edge : edges) {
-                if (edge.getChild().equals(child) && edge.getLabel().equals(label)
-                && edge.getParent().equals(parent)) {
-                    throw new IllegalArgumentException("Edge already exists");
-                }
-            }
             Edge edge = new Edge(parent, child, label);
             this.graph.get(parent).add(edge);
             this.totalEdges++;

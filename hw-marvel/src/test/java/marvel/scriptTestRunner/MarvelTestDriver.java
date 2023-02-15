@@ -186,18 +186,22 @@ public class MarvelTestDriver {
 
     private void listChildren(String graphName, String parentName) {
         Graph<String, String> graph = graphs.get(graphName);
-        List<String> nodes = new ArrayList<>(graph.listChildren(parentName));
-        Collections.sort(nodes);
-        String list = ("the children of " + parentName + " in " + graphName + " are:");
-        if (nodes.size() != 0) {
-            for (String node : nodes) {
-                Set<String> labels = graph.getLabel(parentName, node);
-                for (String label : labels) {
-                    list += " " + node + "(" + label + ")";
+        List<String> children = new ArrayList<>(graph.listChildren(parentName));
+        Collections.sort(children);
+
+        StringBuilder list = new StringBuilder("the children of " + parentName + " in " + graphName + " are:");
+        if (children.isEmpty()) {
+            output.println(" ");
+        } else {
+            for (String child : children) {
+                Set<String> labels = graph.getLabel(parentName, child);
+                List<String> sortedLabels = new ArrayList<>(labels);
+                Collections.sort(sortedLabels);
+
+                for (String label : sortedLabels) {
+                    list.append(" ").append(child).append("(").append(label).append(")");
                 }
             }
-        } else {
-            output.println();
         }
         output.println(list);
     }
