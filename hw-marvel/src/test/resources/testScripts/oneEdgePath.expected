@@ -1,0 +1,6 @@
+# Tests a path with only one edge between nodes
+
+loaded graph nfl
+
+path from TOM-BRADY to MIKE-EVANS:
+TOM-BRADY to MIKE-EVANS via BUCS

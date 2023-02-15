@@ -1,0 +1,6 @@
+# Tests to find if paths are printed in lexicographical order
+# Testing when there are multiple paths
+
+LoadGraph nfl nflPlayers.csv
+
+FindPath nfl TOM-BRADY ROB-GRONKOWSKI

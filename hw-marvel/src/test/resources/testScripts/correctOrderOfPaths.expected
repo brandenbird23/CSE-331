@@ -1,0 +1,7 @@
+# Tests to find if paths are printed in lexicographical order
+# Testing when there are multiple paths
+
+loaded graph nfl
+
+path from TOM-BRADY to ROB-GRONKOWSKI:
+ROB-GRONKOWSKI to TOM-BRADY via BUCS

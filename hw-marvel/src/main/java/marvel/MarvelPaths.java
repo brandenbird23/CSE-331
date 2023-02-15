@@ -13,6 +13,7 @@ public class MarvelPaths {
      * books. At the end, it will ask the user if they want to continue and search again
      * or exit the program. If a path is found, it will display so, if none is found, it
      * will also display so.
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -35,7 +36,7 @@ public class MarvelPaths {
             } else {
                 System.out.println();
                 System.out.println("Searching for " + char1 + " and " + char2 + " paths");
-                List<Graph<String, String>.Edge> path = BFS(marvelGraph, char1, char2);
+                List<Graph<String, String>.Edge> path = findPath(marvelGraph, char1, char2);
                 if (path == null) {
                     System.out.println("Path from" + char1 + " to " + char2 + " was not found.");
                 } else {
@@ -50,7 +51,7 @@ public class MarvelPaths {
             System.out.println("Would you like to search again? \n" +
                     "Enter (y) to continue or enter (n) to exit");
             String decision = answer.nextLine().toLowerCase();
-            if(decision.charAt(0) == 'y') {
+            if (decision.charAt(0) == 'y') {
                 again = true;
             } else if (decision.charAt(0) == 'n') {
                 again = false;
@@ -65,74 +66,93 @@ public class MarvelPaths {
 
     /**
      * Builds a graph using the file given as argument. The file given must not be null.
+     *
      * @param fileName the file given that the graph builds from
      * @return
      * @throws IllegalArgumentException fileName != null
      */
     public static Graph<String, String> graphCreator(String fileName) {
-        if (fileName == null) {
-            throw new IllegalArgumentException("Given file must not be null");
-        } else {
-            Graph<String, String> marvelGraph = new Graph<>();
-            Map<String, List<String>> comics = MarvelParser.parseData(fileName);
-            for (Map.Entry<String, List<String>> entry : comics.entrySet()) {
-                String comic = entry.getKey();
-                List<String> characters = entry.getValue();
+        if (fileName == null) throw new IllegalArgumentException("File name cannot be null");
 
-                for (int i = 0; i < characters.size(); i++) {
-                    String char1 = characters.get(i);
-                    marvelGraph.addNode(char1);
+        Map<String, List<String>> books = MarvelParser.parseData(fileName);
+        Graph<String, String> marvelGraph = new Graph<>();
 
-                    for (int j = i + 1; j < characters.size(); j++) {
-                        String char2 = characters.get(j);
-                        marvelGraph.addNode(char2);
-                        marvelGraph.addEdge(char1, char2, comic);
+        for (String book : books.keySet()) {
+            List<String> charsInBook = books.get(book);
+
+            for (int i = 0; i < charsInBook.size() - 1; i++) {
+                String parent = charsInBook.get(i);
+
+                // Check if the parent node already exists in the graph
+                if (!marvelGraph.containsNode(parent)) {
+                    marvelGraph.addNode(parent);
+                }
+
+                for (int j = i + 1; j < charsInBook.size(); j++) {
+                    String child = charsInBook.get(j);
+
+                    // Check if the child node already exists in the graph
+                    if (!marvelGraph.containsNode(child)) {
+                        marvelGraph.addNode(child);
                     }
+
+                    marvelGraph.addEdge(parent, child, book);
+                    marvelGraph.addEdge(child, parent, book);
                 }
             }
-            return marvelGraph;
         }
+        return marvelGraph;
     }
 
     /**
      * Finds the shortest path between characters using breadth-first search.
-     * Will return the shortest path between the char1 and char2.
+     * Will return the shortest path between the char1 and char2. WIll be
+     * in lexicographical order.
+     *
      * @param graph the graph being searched to find the shortest path
      * @param char1 the starting character (node)
      * @param char2 the ending character (node)
      * @return the shortest path between characters (char1 <-> char2)
-     * @throws IllegalArgumentException if start or end is not in the graph or graph is null
+     * @throws IllegalArgumentException if char1 or char2 is not in the graph or graph is null
      */
-    public static List<Graph<String, String>.Edge> BFS(Graph<String, String> graph, String char1, String char2) {
-        if (graph == null) {
-            throw new IllegalArgumentException("Graph cannot be null");
-        } else if (!(graph.containsNode(char1))) {
-            throw new IllegalArgumentException(char1);
-        } else if (!(graph.containsNode(char2))) {
-            throw new IllegalArgumentException(char2);
-        } else {
-            Queue<String> nodeQueue = new LinkedList<>();
-            Map<String, List<Graph<String, String>.Edge>> nodePath = new HashMap<>();
-            nodeQueue.add(char1);
-            nodePath.put(char1, new ArrayList<>());
-
-            for (String next = nodeQueue.poll(); next != null; next = nodeQueue.poll()) {
-                List<Graph<String, String>.Edge> curr = nodePath.get(next);
-                if (next.equals(char2)) {
-                    return curr;
-                }
-                for (Graph<String, String>.Edge edge : graph.listEdges(next)) {
-                    String childNode = edge.getChild();
-                    if(!(nodePath.containsKey(childNode))) {
-                        List<Graph<String, String>.Edge> newPath = new ArrayList<>(curr);
-                        newPath.add(edge);
-                        nodePath.put(childNode, newPath);
-                        nodeQueue.add(childNode);
-                    }
+    public static List<Graph<String, String>.Edge> findPath(Graph<String, String> graph, String char1, String char2) {
+        // Check for null or invalid input
+        if (graph == null || char1 == null || char2 == null) {
+            throw new IllegalArgumentException("Invalid input: graph, start, and end cannot be null");
+        }
+        if (!graph.containsNode(char1)) {
+            throw new IllegalArgumentException("Start node not found in graph: " + char1);
+        }
+        if (!graph.containsNode(char2)) {
+            throw new IllegalArgumentException("End node not found in graph: " + char2);
+        }
+        Queue<String> nodeQueue = new LinkedList<>();
+        // Create a map to store the shortest path to each node
+        Map<String, List<Graph<String, String>.Edge>> nodePath = new HashMap<>();
+        nodePath.put(char1, new ArrayList<>());
+        // Add the start node to the queue
+        nodeQueue.offer(char1);
+        // While the queue is not empty, process the next node in the queue
+        while (!(nodeQueue.isEmpty())) {
+            String currNode = nodeQueue.poll();
+            List<Graph<String, String>.Edge> currPath = nodePath.get(currNode);
+            // If we have reached the end node, return the shortest path
+            if (currNode.equals(char2)) {
+                return currPath;
+            }
+            // Iterate over the edges of the current node
+            for (Graph<String, String>.Edge edge : graph.listEdges(currNode)) {
+                String childNode = edge.getChild();
+                // If the child node has not been visited, add it to the queue and update the shortest path
+                if (!(nodePath.containsKey(childNode))) {
+                    List<Graph<String, String>.Edge> newPath = new ArrayList<>(currPath);
+                    newPath.add(edge);
+                    nodePath.put(childNode, newPath);
+                    nodeQueue.offer(childNode);
                 }
             }
-            // if none exists
-            return null;
         }
+        // If we reach here, there is no path from start to end
+        return null;
     }
 }

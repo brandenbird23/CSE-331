@@ -1,0 +1,4 @@
+# Tests that all nodes are printed from a file
+
+LoadGraph nfl nflPlayers.csv
+ListNodes nfl

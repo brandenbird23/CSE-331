@@ -1,0 +1,5 @@
+# Tests for finding a path between two nodes when there arent any paths
+
+LoadGraph nfl nflPlayers.csv
+
+FindPath nfl GENO-SMITH BROCK-PURDY

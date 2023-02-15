@@ -1,0 +1,6 @@
+# Tests for finding a path between two nodes when there arent any paths
+
+loaded graph nfl
+
+path from GENO-SMITH to BROCK-PURDY:
+no path found

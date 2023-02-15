@@ -1,0 +1,13 @@
+# Test parser of graph for nfl players
+
+LoadGraph nfl nflPlayers.csv
+
+ListChildren nfl TOM-BRADY
+ListChildren nfl PEYTON-MANNING
+ListChildren nfl GENO-SMITH
+ListChildren nfl GEORGE-KITTLE
+ListChildren nfl DANIEL-JONES
+ListChildren nfl RUSSEL-WILSON
+ListChildren nfl MIKE-EVANS
+ListChildren nfl ROB-GRONKOWSKI
+ListChildren nfl PATRICK-MAHOMES

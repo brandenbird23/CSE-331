@@ -1,0 +1,8 @@
+# Tests finding a path to a node that doesn't exist in the graph
+
+loaded graph nfl
+
+unknown: DAVE-KRAIG
+unknown: DAVE-KRAIG
+unknown: JOE-BURROW
+unknown: JOSH-ALLEN

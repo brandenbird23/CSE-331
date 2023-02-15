@@ -84,6 +84,12 @@ public class MarvelTestDriver {
                 case "ListChildren":
                     listChildren(arguments);
                     break;
+                case "LoadGraph":
+                    loadGraph(arguments);
+                    break;
+                case "FindPath":
+                    findPath(arguments);
+                    break;
                 default:
                     output.println("Unrecognized command: " + command);
                     break;
@@ -196,7 +202,59 @@ public class MarvelTestDriver {
         output.println(list);
     }
 
-    //TODO
+    private void loadGraph(List<String> arguments) {
+        if(arguments.size() != 2) {
+            throw new CommandException("Bad arguments to LoadGraph: " + arguments);
+        }
+
+        String graphName = arguments.get(0);
+        String fileName = arguments.get(1);
+        loadGraph(graphName, fileName);
+    }
+
+    private void loadGraph(String graphName, String fileName) {
+        Graph<String, String> graph = MarvelPaths.graphCreator(fileName);
+        graphs.put(graphName, graph);
+        output.println("loaded graph " + graphName);
+    }
+
+    private void findPath(List<String> arguments) {
+        if(arguments.size() != 3) {
+            throw new CommandException("Bad arguments to FindPath: " + arguments);
+        }
+
+        String graphName = arguments.get(0);
+        String char1 = arguments.get(1);
+        String char2 = arguments.get(2);
+        findPath(graphName, char1, char2);
+    }
+
+    private void findPath(String graphName, String char1, String char2) {
+        Graph<String, String> graph = graphs.get(graphName);
+        try {
+            List<Graph<String, String>.Edge> path = MarvelPaths.findPath(graph, char1, char2);
+            output.println("path from " + char1 + " to " + char2 + ":");
+            if (path == null) {
+                output.println("no path found");
+            } else {
+                for (Graph<String, String>.Edge edge : path) {
+                    output.println(edge.getParent() + " to " + edge.getChild() +
+                            " via " + edge.getLabel());
+                }
+            }
+        }
+        catch (IllegalArgumentException e) {
+            if ((!(graph.containsNode(char1))) && (!(graph.containsNode(char2)))) {
+                output.println("unknown: " + char1);
+                output.println("unknown: " + char2);
+            }
+            else if(!(graph.containsNode(char1))) {
+                output.println("unknown: " + char1);
+            } else if(!(graph.containsNode(char2))) {
+                output.println("unknown: " + char2);
+            }
+        }
+    }
 
 
 

@@ -1,0 +1,7 @@
+# Tests to find the path between nodes when it is longer than 1]
+
+loaded graph nfl
+
+path from RUSSEL-WILSON to TOM-BRADY:
+RUSSEL-WILSON to PEYTON-MANNING via BRONCOS
+PEYTON-MANNING to TOM-BRADY via RETIRED

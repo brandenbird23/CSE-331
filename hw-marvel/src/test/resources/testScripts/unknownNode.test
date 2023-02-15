@@ -1,0 +1,7 @@
+# Tests finding a path to a node that doesn't exist in the graph
+
+LoadGraph nfl nflPlayers.csv
+
+FindPath nfl GENO-SMITH DAVE-KRAIG
+FindPath nfl DAVE-KRAIG RUSSEL-WILSON
+FindPath nfl JOE-BURROW JOSH-ALLEN

@@ -1,0 +1,5 @@
+# Tests a path with only one edge between nodes
+
+LoadGraph nfl nflPlayers.csv
+
+FindPath nfl TOM-BRADY MIKE-EVANS
