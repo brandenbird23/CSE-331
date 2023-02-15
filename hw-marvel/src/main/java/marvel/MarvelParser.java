@@ -26,8 +26,8 @@ public class MarvelParser {
      *
      * @param filename The file that will be read.
      * @spec.requires filename is a valid file in the resources/data folder.
+     * @return comics Map of the comic books
      */
-    // TODO: Replace 'void' with the type you want the parser to produce
     public static Map<String, List<String>> parseData(String filename) {
         List<String> lines = readLines(filename);
 

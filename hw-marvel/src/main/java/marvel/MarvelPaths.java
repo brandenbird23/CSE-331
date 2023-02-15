@@ -3,7 +3,9 @@ import graph.*;
 
 import java.util.*;
 
-
+/**
+ * will comment this soon
+ */
 public class MarvelPaths {
     /* Not an ADT */
 
@@ -14,7 +16,7 @@ public class MarvelPaths {
      * or exit the program. If a path is found, it will display so, if none is found, it
      * will also display so.
      *
-     * @param args
+     * @param args main method
      */
     public static void main(String[] args) {
         Graph<String, String> marvelGraph = MarvelPaths.graphCreator("marvel.csv");
@@ -68,7 +70,7 @@ public class MarvelPaths {
      * Builds a graph using the file given as argument. The file given must not be null.
      *
      * @param fileName the file given that the graph builds from
-     * @return
+     * @return a new marvel graph
      * @throws IllegalArgumentException fileName != null
      */
     public static Graph<String, String> graphCreator(String fileName) {
@@ -112,7 +114,7 @@ public class MarvelPaths {
      * @param graph the graph being searched to find the shortest path
      * @param char1 the starting character (node)
      * @param char2 the ending character (node)
-     * @return the shortest path between characters (char1 <-> char2)
+     * @return the shortest path between characters (char1 and char2)
      * @throws IllegalArgumentException if char1 or char2 is not in the graph or graph is null
      */
     public static List<Graph<String, String>.Edge> findPath(Graph<String, String> graph, String char1, String char2) {
