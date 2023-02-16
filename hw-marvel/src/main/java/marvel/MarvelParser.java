@@ -39,7 +39,14 @@ public class MarvelParser {
 
             // add a character to list of characters for comic
             // create new arraylist if not already present
-            comics.computeIfAbsent(comic, k -> new ArrayList<>()).add(character);
+            if (!(comics.containsKey(comic))){
+                comics.put(comic, new ArrayList<>());
+            }
+
+            // doesn't allow for duplicates in character list for each book
+            if (!(comics.get(comic).contains(character))) {
+                comics.get(comic).add(character);
+            }
         }
         return comics;
     }

@@ -74,36 +74,39 @@ public class MarvelPaths {
      * @throws IllegalArgumentException fileName != null
      */
     public static Graph<String, String> graphCreator(String fileName) {
-        if (fileName == null) throw new IllegalArgumentException("File name cannot be null");
+        if (fileName == null) {
+            throw new IllegalArgumentException("File name cannot be null");
+        } else {
 
-        Map<String, List<String>> books = MarvelParser.parseData(fileName);
-        Graph<String, String> marvelGraph = new Graph<>();
+            Map<String, List<String>> comics = MarvelParser.parseData(fileName);
+            Graph<String, String> marvelGraph = new Graph<>();
 
-        for (String book : books.keySet()) {
-            List<String> charsInBook = books.get(book);
+            for (String comic : comics.keySet()) {
+                List<String> charsInComic = comics.get(comic);
 
-            for (int i = 0; i < charsInBook.size() - 1; i++) {
-                String parent = charsInBook.get(i);
+                for (int i = 0; i < charsInComic.size() - 1; i++) {
+                    String parent = charsInComic.get(i);
 
-                // Check if the parent node already exists in the graph
-                if (!marvelGraph.containsNode(parent)) {
-                    marvelGraph.addNode(parent);
-                }
-
-                for (int j = i + 1; j < charsInBook.size(); j++) {
-                    String child = charsInBook.get(j);
-
-                    // Check if the child node already exists in the graph
-                    if (!marvelGraph.containsNode(child)) {
-                        marvelGraph.addNode(child);
+                    // Check if the parent node already exists in the graph
+                    if (!(marvelGraph.containsNode(parent))) {
+                        marvelGraph.addNode(parent);
                     }
 
-                    marvelGraph.addEdge(parent, child, book);
-                    marvelGraph.addEdge(child, parent, book);
+                    for (int j = i + 1; j < charsInComic.size(); j++) {
+                        String child = charsInComic.get(j);
+
+                        // Check if the child node already exists in the graph
+                        if (!(marvelGraph.containsNode(child))) {
+                            marvelGraph.addNode(child);
+                        }
+
+                        marvelGraph.addEdge(parent, child, comic);
+                        marvelGraph.addEdge(child, parent, comic);
+                    }
                 }
             }
+            return marvelGraph;
         }
-        return marvelGraph;
     }
 
     /**
@@ -122,10 +125,10 @@ public class MarvelPaths {
         if (graph == null || char1 == null || char2 == null) {
             throw new IllegalArgumentException("Invalid input: graph, start, and end cannot be null");
         }
-        if (!graph.containsNode(char1)) {
+        if (!(graph.containsNode(char1))) {
             throw new IllegalArgumentException("Start node not found in graph: " + char1);
         }
-        if (!graph.containsNode(char2)) {
+        if (!(graph.containsNode(char2))) {
             throw new IllegalArgumentException("End node not found in graph: " + char2);
         }
         Queue<String> nodeQueue = new LinkedList<>();
@@ -143,7 +146,7 @@ public class MarvelPaths {
                 return currPath;
             }
             // Iterate over the edges of the current node
-            for (Graph<String, String>.Edge edge : graph.listEdges(currNode)) {
+            for (Graph<String, String>.Edge edge : graph.listEdges(currNode)) { //TODO sort
                 String childNode = edge.getChild();
                 // If the child node has not been visited, add it to the queue and update the shortest path
                 if (!(nodePath.containsKey(childNode))) {
@@ -154,7 +157,7 @@ public class MarvelPaths {
                 }
             }
         }
-        // If we reach here, there is no path from start to end
+        // If we reach here, there is no path from char1 to char2
         return null;
     }
 }
