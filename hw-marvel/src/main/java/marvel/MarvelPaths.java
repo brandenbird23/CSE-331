@@ -45,7 +45,7 @@ public class MarvelPaths {
                 if (path == null) {
                     System.out.println("Path from " + char1 + " to " + char2 + " was not found.");
                 } else {
-                    // string to set new parent node after each iteration
+                    // String to set new parent node after each iteration
                     String parent = char1;
                     for (Graph<String, String>.Edge edge : path) {
                         System.out.println(edge.getParent() + " to " + edge.getChild() +
@@ -96,7 +96,7 @@ public class MarvelPaths {
                     }
                     for (int j = i + 1; j < charsInComic.size(); j++) {
                         String child = charsInComic.get(j);
-                        if (!child.isEmpty() && !marvelGraph.containsNode(child)) {
+                        if (!(child.isEmpty()) && !(marvelGraph.containsNode(child))) {
                             marvelGraph.addNode(child);
                         }
                         marvelGraph.addEdge(parent, child, comic);
@@ -122,13 +122,13 @@ public class MarvelPaths {
     public static List<Graph<String, String>.Edge> findPath(Graph<String, String> graph, String char1, String char2) {
         // Check for null or invalid input
         if (graph == null || char1 == null || char2 == null) {
-            throw new IllegalArgumentException("Invalid input: graph, char1, and end cannot be null");
+            throw new IllegalArgumentException("Invalid input: graph, char1, and char2 cannot be null");
         }
         if (!(graph.containsNode(char1))) {
-            throw new IllegalArgumentException("Start node not found in graph: " + char1);
+            throw new IllegalArgumentException("Char1 not found in graph: " + char1);
         }
         if (!(graph.containsNode(char2))) {
-            throw new IllegalArgumentException("End node not found in graph: " + char2);
+            throw new IllegalArgumentException("Char2 not found in graph: " + char2);
         }
         Queue<String> nodeQueue = new LinkedList<>();
         // Create a map to store the shortest path to each node
@@ -164,7 +164,7 @@ public class MarvelPaths {
             for (Graph<String, String>.Edge edge : sortedEdges) {
                 String childNode = edge.getChild();
                 // If the child node has not been visited, add it to the queue and update the shortest path
-                if (!nodePath.containsKey(childNode)) {
+                if (!(nodePath.containsKey(childNode))) {
                     List<Graph<String, String>.Edge> newPath = new ArrayList<>(currPath);
                     newPath.add(edge);
                     nodePath.put(childNode, newPath);
