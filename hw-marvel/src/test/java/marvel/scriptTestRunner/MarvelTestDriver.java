@@ -190,17 +190,14 @@ public class MarvelTestDriver {
         Collections.sort(children);
 
         StringBuilder list = new StringBuilder("the children of " + parentName + " in " + graphName + " are:");
-        if (children.isEmpty()) {
-            output.println(" ");
-        } else {
-            for (String child : children) {
-                Set<String> labels = graph.getLabel(parentName, child);
-                List<String> sortedLabels = new ArrayList<>(labels);
-                Collections.sort(sortedLabels);
 
-                for (String label : sortedLabels) {
-                    list.append(" ").append(child).append("(").append(label).append(")");
-                }
+        for (String child : children) {
+            Set<String> labels = graph.getLabel(parentName, child);
+            List<String> sortedLabels = new ArrayList<>(labels);
+            Collections.sort(sortedLabels);
+
+            for (String label : sortedLabels) {
+                list.append(" ").append(child).append("(").append(label).append(")");
             }
         }
         output.println(list);
