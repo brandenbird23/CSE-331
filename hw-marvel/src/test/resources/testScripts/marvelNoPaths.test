@@ -1,0 +1,5 @@
+# Tests a pair of characters where no path exists
+
+LoadGraph marvel marvel.csv
+
+FindPath marvel SACRIFICER HOFFMAN

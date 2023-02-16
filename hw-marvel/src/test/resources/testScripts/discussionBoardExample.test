@@ -1,0 +1,5 @@
+# Tries to find path that should be 3 edges via discussion post
+
+LoadGraph marvel marvel.csv
+
+FindPath marvel SILVER-SURFER/NORRIN G'RATH

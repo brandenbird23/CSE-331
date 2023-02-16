@@ -1,0 +1,5 @@
+# Tests to find a longer path (via discussion post)
+
+LoadGraph marvel marvel.csv
+
+FindPath marvel SACRIFICER SUMMER-KLEIN

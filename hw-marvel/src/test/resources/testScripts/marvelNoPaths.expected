@@ -1,0 +1,6 @@
+# Tests a pair of characters where no path exists
+
+loaded graph marvel
+
+path from SACRIFICER to HOFFMAN:
+no path found

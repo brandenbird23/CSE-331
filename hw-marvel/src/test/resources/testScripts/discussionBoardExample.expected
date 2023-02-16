@@ -1,0 +1,8 @@
+# Tries to find path that should be 3 edges via discussion post
+
+loaded graph marvel
+
+path from SILVER-SURFER/NORRIN to G'RATH:
+SILVER-SURFER/NORRIN to DAGGER/TANDY-BOWEN via IG-6
+DAGGER/TANDY-BOWEN to KILLRAVEN/JONATHAN-R via AA2-18
+KILLRAVEN/JONATHAN-R to G'RATH via AA2-35

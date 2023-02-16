@@ -1,0 +1,9 @@
+# Tests to find a longer path (via discussion post)
+
+loaded graph marvel
+
+path from SACRIFICER to SUMMER-KLEIN:
+SACRIFICER to HAWK via AA2-28
+HAWK to BARON-STRUCKER/WOLFG via ST-156
+BARON-STRUCKER/WOLFG to HANNIBAL/HENRY-KING via NS-2
+HANNIBAL/HENRY-KING to SUMMER-KLEIN via JIM-520

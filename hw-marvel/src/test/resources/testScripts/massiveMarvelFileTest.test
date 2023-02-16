@@ -1,0 +1,15 @@
+# Here is a few tests from Ameya Agrawal Discussion post
+
+LoadGraph marvel marvel.csv
+
+# Should have 2 length path
+FindPath marvel IRON-MAN/TONY-STARK KANGAROO-II
+
+# Should have 3 length path
+FindPath marvel GOOM MR.-FANTASTIC/REED-R
+
+# Should have 3 length path
+FindPath marvel SHA-SHAN SQUIRREL-GIRL
+
+# Should Return No Path Found
+FindPath marvel GOOM HOFFMAN

@@ -1,0 +1,24 @@
+# Here is a few tests from Ameya Agrawal Discussion post
+
+loaded graph marvel
+
+# Should have 2 length path
+path from IRON-MAN/TONY-STARK to KANGAROO-II:
+IRON-MAN/TONY-STARK to ABSORBING-MAN/CARL-C via A-183
+ABSORBING-MAN/CARL-C to KANGAROO-II via W2-164
+
+# Should have 3 length path
+path from GOOM to MR.-FANTASTIC/REED-R:
+GOOM to VENUS/APHRODITE/VICT via M/VS-1/3
+VENUS/APHRODITE/VICT to ANGEL/WARREN-KENNETH via CHAMP-1
+ANGEL/WARREN-KENNETH to MR.-FANTASTIC/REED-R via A-3
+
+# Should have 3 length path
+path from SHA-SHAN to SQUIRREL-GIRL:
+SHA-SHAN to ANGEL/WARREN-KENNETH via PPTSS-18
+ANGEL/WARREN-KENNETH to DR.-DOOM/VICTOR-VON via CHAMP-16
+DR.-DOOM/VICTOR-VON to SQUIRREL-GIRL via M/SH3-8/3
+
+# Should Return No Path Found
+path from GOOM to HOFFMAN:
+no path found

@@ -4,7 +4,10 @@ import graph.*;
 import java.util.*;
 
 /**
- * will comment this soon
+ * This class will build a labeled graph that consists of
+ * characters as nodes and edges between the nodes that
+ * represent the comic book they share. Will find the shortest
+ * path.
  */
 public class MarvelPaths {
     /* Not an ADT */
@@ -40,15 +43,17 @@ public class MarvelPaths {
                 System.out.println("Searching for " + char1 + " and " + char2 + " paths");
                 List<Graph<String, String>.Edge> path = findPath(marvelGraph, char1, char2);
                 if (path == null) {
-                    System.out.println("Path from" + char1 + " to " + char2 + " was not found.");
+                    System.out.println("Path from " + char1 + " to " + char2 + " was not found.");
                 } else {
+                    // string to set new parent node after each iteration
+                    String parent = char1;
                     for (Graph<String, String>.Edge edge : path) {
-                        System.out.println(edge.getParent() + " and " + edge.getChild() +
-                                " are in " + edge.getLabel());
+                        System.out.println(edge.getParent() + " to " + edge.getChild() +
+                                " via " + edge.getLabel());
+                        parent = edge.getChild();
                     }
                 }
             }
-
             System.out.println();
             System.out.println("Would you like to search again? \n" +
                     "Enter (y) to continue or enter (n) to exit");
@@ -83,26 +88,17 @@ public class MarvelPaths {
 
             for (String comic : comics.keySet()) {
                 List<String> charsInComic = comics.get(comic);
-
                 for (int i = 0; i < charsInComic.size(); i++) {
                     String parent = charsInComic.get(i);
-
                     // Check if the parent node already exists in the graph
                     if (!(marvelGraph.containsNode(parent))) {
                         marvelGraph.addNode(parent);
                     }
-
                     for (int j = i + 1; j < charsInComic.size(); j++) {
                         String child = charsInComic.get(j);
-                        if (child.equals("")) {
+                        if (!child.isEmpty() && !marvelGraph.containsNode(child)) {
                             marvelGraph.addNode(child);
                         }
-
-                        // Check if the child node already exists in the graph
-                        if (!(marvelGraph.containsNode(child))) {
-                            marvelGraph.addNode(child);
-                        }
-
                         marvelGraph.addEdge(parent, child, comic);
                         marvelGraph.addEdge(child, parent, comic);
                     }
@@ -126,7 +122,7 @@ public class MarvelPaths {
     public static List<Graph<String, String>.Edge> findPath(Graph<String, String> graph, String char1, String char2) {
         // Check for null or invalid input
         if (graph == null || char1 == null || char2 == null) {
-            throw new IllegalArgumentException("Invalid input: graph, start, and end cannot be null");
+            throw new IllegalArgumentException("Invalid input: graph, char1, and end cannot be null");
         }
         if (!(graph.containsNode(char1))) {
             throw new IllegalArgumentException("Start node not found in graph: " + char1);
@@ -136,32 +132,39 @@ public class MarvelPaths {
         }
         Queue<String> nodeQueue = new LinkedList<>();
         // Create a map to store the shortest path to each node
-        Map<String, List<Graph<String, String>.Edge>> nodePath = new HashMap<>();
-        // Initialize the shortest path for the start node
+        Map<String, List<Graph<String, String>.Edge>> nodePath = new TreeMap<>();
+        // Initialize the shortest path for the char1 node
         List<Graph<String, String>.Edge> startPath = new ArrayList<>();
         nodePath.put(char1, startPath);
-        // Add the start node to the queue
+        // Add the char1 node to the queue
         nodeQueue.offer(char1);
         // While the queue is not empty, process the next node in the queue
-        while (!(nodeQueue.isEmpty())) {
+        while (!nodeQueue.isEmpty()) {
             String currNode = nodeQueue.poll();
             List<Graph<String, String>.Edge> currPath = nodePath.get(currNode);
             // If we have reached the end node, return the shortest path
             if (currNode.equals(char2)) {
                 return currPath;
             }
-            // Iterate over the sorted edges of the current node
+            // Iterate over the edges of the current node, sorted lexicographically by label
             List<Graph<String, String>.Edge> sortedEdges = new ArrayList<>(graph.listEdges(currNode));
-            Collections.sort(sortedEdges, new Comparator<Graph<String, String>.Edge>() {
-                @Override
-                public int compare(Graph<String, String>.Edge edge1, Graph<String, String>.Edge edge2) {
-                    return edge1.getLabel().compareTo(edge2.getLabel());
+            // lambda expression takes two edges and compares them
+            sortedEdges.sort((e1, e2) -> {
+                // compares the child vertices of e1 to the child of e2
+                // if e1 < e2, result will be negative, if equal will be 0, and if e1 > e2 result will be positive
+                int compare = e1.getChild().compareTo(e2.getChild());
+                if (compare != 0) {
+                    return compare;
+                }
+                else {
+                    // if the vertices are equal, will compare and sort via the label
+                    return e1.getLabel().compareTo(e2.getLabel());
                 }
             });
             for (Graph<String, String>.Edge edge : sortedEdges) {
                 String childNode = edge.getChild();
                 // If the child node has not been visited, add it to the queue and update the shortest path
-                if (!(nodePath.containsKey(childNode))) {
+                if (!nodePath.containsKey(childNode)) {
                     List<Graph<String, String>.Edge> newPath = new ArrayList<>(currPath);
                     newPath.add(edge);
                     nodePath.put(childNode, newPath);
