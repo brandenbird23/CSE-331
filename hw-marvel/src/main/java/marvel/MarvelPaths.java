@@ -87,6 +87,7 @@ public class MarvelPaths {
             Graph<String, String> marvelGraph = new Graph<>();
 
             for (String comic : comics.keySet()) {
+                // Characters in each comic and then iterate through each
                 List<String> charsInComic = comics.get(comic);
                 for (int i = 0; i < charsInComic.size(); i++) {
                     String parent = charsInComic.get(i);
