@@ -43,7 +43,7 @@ public class MarvelParser {
                 comics.put(comic, new ArrayList<>());
             }
 
-            // dno duplicates in the characterList for each comic
+            // no duplicates in the characterList for each comic
             if (!(comics.get(comic).contains(character))) {
                 comics.get(comic).add(character);
             }
