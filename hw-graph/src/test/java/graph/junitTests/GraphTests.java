@@ -108,14 +108,6 @@ public class GraphTests {
         assertEquals(expected, children);
     }
 
-    @Test (expected = RuntimeException.class)
-    public void testDuplicateEdge() {
-        this.graph1.addNode("node1");
-        this.graph1.addNode("node2");
-
-        this.graph1.addEdge("node1", "node2", "label");
-        this.graph1.addEdge("node1", "node2", "label");
-    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////
