@@ -1,3 +1,4 @@
 Briefly list any changes you made to your graph class during hw-pathfinder,
 and why you made those changes.
 
+I had already created my graph with generics so did not need to change anything.
