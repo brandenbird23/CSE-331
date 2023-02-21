@@ -34,7 +34,9 @@ public class CampusMap implements ModelAPI {
 
 
     /**
-     * commenting soon
+     * Initializes the campus graph and loads the buildings and path data from given csv files
+     * The building data stores the building names and coordinates, added as nodes to the graph
+     * The path data adds edges to the graph connecting buildings
      */
     public CampusMap() {
         this.campusGraph = new Graph<>();
@@ -65,7 +67,6 @@ public class CampusMap implements ModelAPI {
     }
 
     /**
-     *
      * @param shortName The short name of a building to query.
      * @return true if contains shortName
      */

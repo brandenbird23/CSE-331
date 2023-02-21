@@ -6,18 +6,20 @@ import pathfinder.datastructures.Path;
 import java.util.*;
 
 /**
- * Not an ADT. Implements Dijkstra's algorithm to find the shortest Path
+ * Not an ADT.
+ * Implements Dijkstra's algorithm to find the shortest Path
  * between two separate nodes
  */
 public class Dijkstra {
 
     /**
-     * comment soon
-     * @param graph todo
-     * @param start todo
-     * @param dest todo
-     * @return todo
-     * @param <T> todo
+     * Finds the shortest path between two nodes (start and dest) using Dijkstra's
+     * algorithm.
+     * @param graph graph to search for path
+     * @param start node the search will start at
+     * @param dest node the search will end at
+     * @param <T> the type of node
+     * @return the path object representing the shortest path from start to dest, including the cost
      */
     public static <T> Path<T> findPath(Graph<T, Double> graph, T start, T dest) {
         if (graph == null) {
@@ -31,24 +33,37 @@ public class Dijkstra {
         } else if (!(graph.containsNode(dest))) {
             throw new IllegalArgumentException("Graph doesn't contain destination node");
         } else {
-            PriorityQueue<Path<T>> active = new PriorityQueue<>(new PathComparator<T>());
+            // Create priority queue to store the active paths. Lowest cost path is in the front
+            PriorityQueue<Path<T>> active = new PriorityQueue<>(new PathComparator<>());
+            // Store the nodes with the shortest path found
             Set<T> finished = new HashSet<>();
-            active.add(new Path<T>(start));
+            active.add(new Path<>(start));
+            // Loop until the priority queue is empty ot destination node has been found
             while (!(active.isEmpty())) {
                 Path<T> minPath = active.remove();
                 T minDest = minPath.getEnd();
+                // If last node in path is destination node, return the path
                 if (minDest.equals(dest)) {
                     return minPath;
-                } else {
-                    List<Graph<T, Double>.Edge> children = new ArrayList<>(graph.listEdges(minDest));
-                    for (Graph<T, Double>.Edge edge : children) {
-                        Path<T> newPath = minPath.extend(edge.getChild(), edge.getLabel());
+                // Skip if last node is processed already
+                } else if (finished.contains(minDest)) {
+                    continue;
+                }
+                // Loop over edges of the last node in the path
+                for (Graph<T, Double>.Edge edge : graph.listEdges(minDest)) {
+                    T child = edge.getChild();
+                    double cost = edge.getLabel();
+                    // If child node has been processed, skip it
+                    if (!(finished.contains(child))) {
+                        Path<T> newPath = minPath.extend(child, cost);
                         active.add(newPath);
                     }
                 }
+                // Mark last node as processed
                 finished.add(minDest);
             }
         }
+        // If not found, return null
         return null;
     }
 
