@@ -1,0 +1,13 @@
+# Test for when multiple paths for same node
+
+created graph graph
+
+added node A to graph
+added node B to graph
+
+added edge 7.500 from A to B in graph
+added edge 8.000 from A to B in graph
+
+path from A to B:
+A to B with weight 7.500
+total cost: 7.500

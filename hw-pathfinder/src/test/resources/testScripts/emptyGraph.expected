@@ -1,0 +1,8 @@
+# Test for when graph is empty
+
+created graph graph
+
+graph contains:
+
+unknown: A
+unknown: B

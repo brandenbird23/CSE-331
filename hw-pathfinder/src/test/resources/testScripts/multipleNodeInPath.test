@@ -1,0 +1,14 @@
+# Test for when multiple nodes connect the path
+
+CreateGraph graph
+
+AddNode graph A
+AddNode graph B
+AddNode graph C
+AddNode graph D
+
+AddEdge graph A B 5.0
+AddEdge graph B C 7.0
+AddEdge graph C D 3.0
+
+FindPath graph A D

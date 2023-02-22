@@ -1,0 +1,11 @@
+# Test for when multiple paths for same node
+
+CreateGraph graph
+
+AddNode graph A
+AddNode graph B
+
+AddEdge graph A B 7.5
+AddEdge graph A B 8.0
+
+FindPath graph A B

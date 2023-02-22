@@ -1,0 +1,7 @@
+# Test for when graph is empty
+
+CreateGraph graph
+
+ListNodes graph
+
+FindPath graph A B

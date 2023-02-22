@@ -1,0 +1,16 @@
+# Test for a path to self
+
+created graph graph
+
+added node A to graph
+added node B to graph
+added node C to graph
+added node D to graph
+
+added edge 5.000 from A to B in graph
+added edge 1.000 from A to C in graph
+added edge 3.000 from B to D in graph
+added edge 1.000 from D to C in graph
+
+path from A to A:
+total cost: 0.000

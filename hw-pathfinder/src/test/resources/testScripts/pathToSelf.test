@@ -1,0 +1,15 @@
+# Test for a path to self
+
+CreateGraph graph
+
+AddNode graph A
+AddNode graph B
+AddNode graph C
+AddNode graph D
+
+AddEdge graph A B 5.0
+AddEdge graph A C 1.0
+AddEdge graph B D 3.0
+AddEdge graph D C 1.0
+
+FindPath graph A A
