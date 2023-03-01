@@ -34,6 +34,11 @@ class App extends Component<{}, AppState> { // <- {} means no props.
         window.location.reload();
     }
 
+    downloadPDF() {
+        window.print();
+    }
+
+
   render() {
       return (
           <div>
@@ -55,6 +60,7 @@ class App extends Component<{}, AppState> { // <- {} means no props.
                   justifyContent: 'center'
               }}>
                   <button onClick={this.refreshPage}>Refresh</button>
+                  <button onClick={this.downloadPDF}>Download</button>
               </div>
           </div>
       );
