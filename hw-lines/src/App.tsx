@@ -15,34 +15,49 @@ import Map from "./Map";
 
 // Allows us to write CSS styles inside App.css, any styles will apply to all components inside <App />
 import "./App.css";
+import {Edge} from "./Edge";
 
-interface AppState {}
+interface AppState {
+    text: Edge[];
+}
 
 class App extends Component<{}, AppState> { // <- {} means no props.
 
   constructor(props: any) {
     super(props);
     this.state = {
-      // TODO: store edges in this state
+      text: []
     };
   }
 
+    refreshPage() {
+        window.location.reload();
+    }
+
   render() {
-    return (
-      <div>
-        <h1 id="app-title">Line Mapper!</h1>
-        <div>
-          {/* TODO: define props in the Map component and pass them in here */}
-          <Map />
-        </div>
-        <EdgeList
-          onChange={(value) => {
-            // TODO: Modify this onChange callback to store the edges in the state
-            console.log("EdgeList onChange", value);
-          }}
-        />
-      </div>
-    );
+      return (
+          <div>
+              <h1 id="app-title">UW Campus Path</h1>
+              <div>
+                  <Map
+                      input = {this.state.text}
+                  />
+              </div>
+              <EdgeList
+                  onChange={(value) => {
+                      this.setState({
+                          text: value
+                      });
+                  }}
+              />
+              <div id = "reset" style = {{display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+              }}>
+                  <button onClick={this.refreshPage}>Refresh</button>
+              </div>
+          </div>
+      );
   }
 }
 
