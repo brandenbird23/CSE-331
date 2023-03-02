@@ -35,7 +35,7 @@ class EdgeList extends Component<EdgeListProps, EdgeListState> {
         }
     }
 
-    clearText () {
+    clearText() {
         this.setState({
             text: "",
         })
@@ -51,13 +51,13 @@ class EdgeList extends Component<EdgeListProps, EdgeListState> {
         }
     }
 
-    checkValidEdge (text: string) {
+    checkValidEdge(text: string) {
         // edges from user given data
         let temp: Edge[] = [];
         let data: string[] = text.split("\n");
 
         // loop through each string in the array
-        for(let i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             let flagger: boolean = true;
             let total = data[i].trim().split(" ");
             // check if string contains coordinates + color
@@ -67,11 +67,11 @@ class EdgeList extends Component<EdgeListProps, EdgeListState> {
             // loop through coordinates
             for (let j = 0; j < 4; j++) {
                 if (isNaN(parseInt(total[j]))) {
-                    alert ("Invalid coordinates. Must be integers");
+                    alert("Invalid coordinates. Must be integers");
                     flagger = false;
                 }
                 if (parseInt(total[j]) < 0 || parseInt(total[j]) > 4000) {
-                    alert ("Invalid coordinates. Must be between 0 and 4000");
+                    alert("Invalid coordinates. Must be between 0 and 4000");
                     flagger = false;
                 }
             }
@@ -92,6 +92,10 @@ class EdgeList extends Component<EdgeListProps, EdgeListState> {
         return temp;
     }
 
+    // refresh the page
+    refreshPage() {
+        window.location.reload();
+    }
 
     render() {
         return (
@@ -100,11 +104,12 @@ class EdgeList extends Component<EdgeListProps, EdgeListState> {
                 <textarea
                     rows={5}
                     cols={30}
-                    onChange = {(event) => this.setState({text: event.target.value})}
+                    onChange={(event) => this.setState({text: event.target.value})}
                     value={this.state.text}
                 /> <br/>
                 <button onClick={() => this.changeText()}>Draw</button>
                 <button onClick={() => this.clearText()}>Clear</button>
+                <button onClick={() => this.refreshPage()}>Refresh</button>
             </div>
         );
     }

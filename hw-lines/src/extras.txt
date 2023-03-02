@@ -7,9 +7,13 @@ Describe any additional functionality you added to your application, or any
 significant changes you made to the starter code beyond the basic requirements
 of the assignment, below:
 
-In App.tsx I added a refresh page button. Added this, so it will also reset the camera
+In EdgeList.tsx I added a refresh page button. Added this, so it will also reset the camera
 to the starting position.
 
 In App.tsx I also added a download button. This will user the browsers built in download to PDF
 with the click, to save what the current map and position looks like, as well as the line points.
 This saves the whole page as a pdf.
+
+In App.tsx I was able to add a download button. This will download the map to PNG with the click.
+I used dom-to-image, via https://github.com/tsayen/dom-to-image. Installation of dom-to-image is
+required. to do so is (npm install dom-to-image).
