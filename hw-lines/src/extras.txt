@@ -18,3 +18,4 @@ This saves the whole page as a pdf.
 In App.tsx I was able to add a download button. This will download the map to PNG with the click.
 I used dom-to-image, via https://github.com/tsayen/dom-to-image. Copied the dom-to-image.js file
 from GitHub into my module so npm install isn't required.
+If this does not work properly, npm install dom-to-image should fix it.
