@@ -12,8 +12,7 @@
 import React, { Component, createRef } from "react";
 import EdgeList from "./EdgeList";
 import Map from "./Map";
-// @ts-ignore
-import domtoimage from "dom-to-image";
+import domtoimage from "./dom-to-image";
 
 
 // Allows us to write CSS styles inside App.css, any styles will apply to all components inside <App />
