@@ -10,6 +10,7 @@ of the assignment, below:
 In EdgeList.tsx I added a refresh page button. Added this, so it will also reset the camera
 to the starting position.
 
+
 In App.tsx I also added a download button. This will user the browsers built in download to PDF
 with the click, to save what the current map and position looks like, as well as the line points.
 This saves the whole page as a pdf.
