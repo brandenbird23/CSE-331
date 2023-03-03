@@ -1,8 +1,8 @@
 /**
- * From github library
+ * From GitHub library
  * https://github.com/tsayen/dom-to-image
  *
- * add this so dont need to use npm install
+ * add this so don't need to use npm install
  */
 
 
