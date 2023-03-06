@@ -49,7 +49,8 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
     // retrieve building data from the server
     networkRequest = async () => {
         try {
-            let response = await fetch("http://localhost:4567/buildings");
+            let responsePromise = await fetch("http://localhost:4567/buildings");
+            let response = await responsePromise;
             if (!(response.ok)) {
                 alert("The status is wrong! Expected: 200, Was: " + response.status);
                 // stop executing once response is bad
@@ -119,7 +120,7 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
     parsePath(data: string) {
         let ret: Edge[] = [];
         let obj = JSON.parse(data);
-        let color: string;
+        let color: string = this.state.color; // set color to dropdown menu selection
         obj["path"].forEach((e: any) => {
             let edge: Edge = {
                 x1: e['start']['x'],
@@ -127,8 +128,10 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
                 x2: e['end']['x'],
                 y2: e['end']['y'],
                 color: color,
+                key: e,
             }
             ret.push(edge);
+
         })
         return ret;
     }
@@ -169,9 +172,7 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
                         <select value={this.state.startBuilding} onChange={(e) => this.setStartBuilding(e.target.value)}>
                             <option value="" key=""></option>
                             {this.state.buildings.map((building) => (
-                                <option value={building} key={building}>
-                                    {building}
-                                </option>
+                                <option value={building} key={building}>{building}</option>
                             ))}
                         </select>
                     </div>
@@ -182,9 +183,7 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
                         <select value={this.state.endBuilding} onChange={(e) => this.setEndBuilding(e.target.value)}>
                             <option value="" key=""></option>
                             {this.state.buildings.map((building) => (
-                                <option value={building} key={building}>
-                                    {building}
-                                </option>
+                                <option value={building} key={building}>{building}</option>
                             ))}
                         </select>
                     </div>

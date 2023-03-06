@@ -30,7 +30,7 @@ class App extends Component<{}, AppState> { // <- {} means no props.
     constructor(props: any) {
         super(props);
         this.state = {
-            text: [],
+            text: []
         };
     }
 
@@ -75,7 +75,7 @@ class App extends Component<{}, AppState> { // <- {} means no props.
                 <BuildingList
                     onChange={(value) => {
                         this.setState({
-                            text: value,
+                            text: value
                         });
                     }}
                 />

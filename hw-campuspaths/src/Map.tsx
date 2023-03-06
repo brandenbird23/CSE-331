@@ -29,7 +29,11 @@ interface MapState {}
 class Map extends Component<MapProps, MapState> {
     constructor(props: MapProps) {
         super(props);
+        this.state = {
+            color: "black", // default color
+        }
     }
+
 
     drawLine(text: Edge[]): React.ReactNode[] {
         const result: React.ReactNode[] = [];
@@ -38,16 +42,17 @@ class Map extends Component<MapProps, MapState> {
             return result;
         }
         for (let i = 0; i < text.length; i++) {
-            const edge = text[i];
+            let edge = text[i];
+            console.log(`Color of MapLine ${i}: ${edge.color}`)
             result.push(
-                React.createElement(MapLine, {
-                    color: edge.color,
-                    x1: edge.x1,
-                    y1: edge.y1,
-                    x2: edge.x2,
-                    y2: edge.y2,
-                    key: i,
-                })
+                <MapLine
+                    color={edge.color}
+                    x1={edge.x1}
+                    y1={edge.y1}
+                    x2={edge.x2}
+                    y2={edge.y2}
+                    key={i}
+                />
             );
         }
         return result;
