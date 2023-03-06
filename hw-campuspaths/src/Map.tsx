@@ -31,6 +31,7 @@ class Map extends Component<MapProps, MapState> {
     drawLine(): React.ReactNode[] {
         const result: React.ReactNode[] = [];
         let text = this.props.input;
+        console.log("Text value: " + text)
         if (text === null) {
             return result;
         }

@@ -136,18 +136,21 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
         this.setState({
             startBuilding: val,
         })
+        console.log("Start Building: " + val)
     }
 
     setEndBuilding (val: string) {
         this.setState({
             endBuilding: val,
         })
+        console.log("End Building: " + val)
     }
 
     setColor (val: string) {
         this.setState({
             color: val,
         })
+        console.log("Color: " + val)
     }
 
     // refresh the page
@@ -196,6 +199,7 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
                             <option value="yellow" key="yellow">Yellow</option>
                             <option value="purple" key="purple">Purple</option>
                             <option value="orange" key="orange">Orange</option>
+                            <option value="black" key="black">Black</option>
                         </select>
                     </div>
                 </div>
