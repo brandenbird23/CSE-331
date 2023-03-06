@@ -31,3 +31,38 @@ file was empty.
     width: 800px;
     height: 600px;
 }
+
+/* Centers and styles dropdowns */
+#dropdown {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#dropdown select {
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+h1, h3, button {
+    text-align: center;
+}
+
+/* Centers the "Line Mapper!" text, which is in a <p> (paragraph) tag inside the <App /> component, and has an
+ID of "app-title". Also makes the text bigger, bold, and adds some space around the title. */
+#app-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+/* Same as above, but with ID "edge-list", and also creates a little margin so things aren't squished together. */
+#building-list {
+    text-align: center;
+    margin: 5px;
+}
