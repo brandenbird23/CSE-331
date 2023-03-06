@@ -1,9 +1,24 @@
 CSE 331 Homework Answers:
 
-Your Name:
+Your Name: Branden Bird
 
 List any additional features or functionality you implemented
 in your CampusPaths application below. Only things listed here
 will be considered for extra credit.
 
+
+In BuildingList.tsx I added a refresh page button. Added this, so it will also reset the camera
+to the starting position.
+
+In BuildingList.tsx I added a 3rd dropdown menu that allows the user to select a color to use for
+the lines on the map.
+
+In App.tsx I also added a download button. This will use the browsers built in download to PDF
+with the click, to save what the current map and position looks like, as well as the line points.
+This saves the whole page as a pdf.
+
+In App.tsx I was able to add a download button. This will download the map to PNG with the click.
+I used dom-to-image, via https://github.com/tsayen/dom-to-image. Copied the dom-to-image.js file
+from GitHub into my module so npm install isn't required.
+If this does not work properly, npm install dom-to-image should fix it.
 
