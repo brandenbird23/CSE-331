@@ -107,7 +107,8 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
                     return;
                 } else {
                     const text = await response.text();
-                    this.parsePath(text);
+                    const edge = this.parsePath(text);
+                    this.props.onChange(edge);
                 }
             } catch (e) {
                 alert("There was an error while trying to contact the server");

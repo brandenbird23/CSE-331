@@ -27,10 +27,12 @@ interface MapProps {
 interface MapState {}
 
 class Map extends Component<MapProps, MapState> {
+    constructor(props: MapProps) {
+        super(props);
+    }
 
-    drawLine(): React.ReactNode[] {
+    drawLine(text: Edge[]): React.ReactNode[] {
         const result: React.ReactNode[] = [];
-        let text = this.props.input;
         console.log("Text value: " + text)
         if (text === null) {
             return result;
@@ -44,6 +46,7 @@ class Map extends Component<MapProps, MapState> {
                     y1: edge.y1,
                     x2: edge.x2,
                     y2: edge.y2,
+                    key: i,
                 })
             );
         }
@@ -62,7 +65,7 @@ class Map extends Component<MapProps, MapState> {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     {
-                        this.drawLine()
+                        this.drawLine(this.props.input)
                     }
                 </MapContainer>
             </div>
