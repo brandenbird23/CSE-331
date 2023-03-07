@@ -161,11 +161,6 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
         window.location.reload();
     }
 
-    showGuide() {
-
-    }
-
-
     render() {
         return (
             <div id={"building-list"}>
