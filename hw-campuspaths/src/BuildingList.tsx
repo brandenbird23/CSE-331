@@ -199,7 +199,11 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
                             <option value="yellow" key="yellow">Yellow</option>
                             <option value="purple" key="purple">Purple</option>
                             <option value="orange" key="orange">Orange</option>
+                            <option value="white" key="white">White</option>
                             <option value="black" key="black">Black</option>
+                            <option value="pink" key="pink">Pink</option>
+                            <option value="brown" key="brown">Brown</option>
+                            <option value="teal" key="teal">Teal</option>
                         </select>
                     </div>
                 </div>
