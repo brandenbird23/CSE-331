@@ -30,7 +30,7 @@ class Map extends Component<MapProps, MapState> {
     constructor(props: MapProps) {
         super(props);
         this.state = {
-            color: "black", // default color
+            color: ""
         }
     }
 
@@ -43,7 +43,7 @@ class Map extends Component<MapProps, MapState> {
         }
         for (let i = 0; i < text.length; i++) {
             let edge = text[i];
-            console.log(`Color of MapLine ${i}: ${edge.color}`)
+            console.log("Color of MapLine: " + edge.color)
             result.push(
                 <MapLine
                     color={edge.color}

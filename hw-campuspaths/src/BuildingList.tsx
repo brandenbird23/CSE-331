@@ -131,7 +131,6 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
                 key: e,
             }
             ret.push(edge);
-
         })
         return ret;
     }
@@ -160,6 +159,10 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
     // refresh the page
     refreshPage() {
         window.location.reload();
+    }
+
+    showGuide() {
+
     }
 
 

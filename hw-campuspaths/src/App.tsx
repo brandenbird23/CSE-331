@@ -50,7 +50,7 @@ class App extends Component<{}, AppState> { // <- {} means no props.
                 .then(function (dataUrl: string) {
                     // create html element
                     const link = document.createElement("a");
-                    link.download = "UW Lines Map.png";   // file name will be downloaded as
+                    link.download = "UW Campus Path.png";   // file name will be downloaded as
                     link.href = dataUrl;
                     link.click();
                 })
