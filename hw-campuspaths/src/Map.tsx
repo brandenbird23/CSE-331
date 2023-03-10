@@ -37,13 +37,11 @@ class Map extends Component<MapProps, MapState> {
 
     drawLine(text: Edge[]): React.ReactNode[] {
         const result: React.ReactNode[] = [];
-        console.log("Text value: " + text)
         if (text === null) {
             return result;
         }
         for (let i = 0; i < text.length; i++) {
             let edge = text[i];
-            console.log("Color of MapLine: " + edge.color)
             result.push(
                 <MapLine
                     color={edge.color}

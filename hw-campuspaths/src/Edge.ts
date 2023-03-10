@@ -9,5 +9,4 @@ export interface Edge {
     y2: number;
     color: string;
     key: string;
-
 }

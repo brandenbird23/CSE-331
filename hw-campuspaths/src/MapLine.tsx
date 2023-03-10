@@ -57,7 +57,6 @@ class MapLine extends Component<MapLineProps, {}> {
   }
 
   render() {
-    console.log("Color: " + typeof this.props.color)
     return (
         <Polyline
             // Path options includes color, among a variety of line customizations

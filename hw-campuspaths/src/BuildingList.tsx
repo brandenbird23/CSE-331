@@ -139,21 +139,18 @@ class BuildingList extends Component<BuildingListProps, BuildingListState> {
         this.setState({
             startBuilding: val,
         })
-        console.log("Start Building: " + val)
     }
 
     setEndBuilding (val: string) {
         this.setState({
             endBuilding: val,
         })
-        console.log("End Building: " + val)
     }
 
     setColor (val: string) {
         this.setState({
             color: val,
         })
-        console.log("Color: " + val)
     }
 
     // refresh the page
