@@ -1,3 +1,5 @@
+# UW CSE 331 Coursework
+
 Instructor: Hal Perkins (Winter 2023)
 
 The aim of this course is to help you write programs of higher quality and increased complexity.
